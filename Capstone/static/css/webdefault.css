@@ -1,0 +1,279 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #2980B9, #CCCCFF);
+  font-family: "sans-serif";
+  font-weight: 100;
+}
+
+/* Navigation Bar */
+
+.nav {
+  overflow: hidden;
+  color: rgba(255,255,255,0.9);
+  background-color: rgba(0,0,0,0.7);
+}
+
+.nav a {
+  float: left;
+  display: block;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Default Page Layout */
+
+.header {
+  display: inline-flex;
+  padding-left: 40%;
+}
+
+.column {
+  margin: auto;
+  padding: 15px;
+}
+
+.side {
+  float: left;
+  width: 15%;
+}
+
+.main {
+  width: 70%;
+}
+
+.main h2 {
+
+  text-align: center;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* all buttons */
+
+.button {
+  margin: auto;
+  text-align: center;
+  padding: 6px 0px;
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  border-radius: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+
+}
+
+.button:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+
+
+/* Login and Logout */
+.logdiv {
+  display: inline-flex;
+  float: right;
+  width: 15%;
+  justify-content: left;
+  margin-top: 15px;
+}
+
+.login label {
+  font-weight: bold;
+  display: inline-block;
+  width: 75px;
+  text-align: left;
+}
+
+.loginbox {
+  background-color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 1rem;
+}
+
+.logout {
+  width: 90%;
+  margin-top: 5px;
+}
+
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  width: 100%;
+
+}
+
+th, td {
+  padding: 15px;
+  background-color: rgba(255,255,255,0.2);
+  color: black;
+  position: relative;
+}
+
+th {
+  text-align: left;
+}
+
+thead, th {
+    color: rgba(255,255,255,0.9);
+    background-color: rgba(0,0,0,0.4);
+}
+
+td:hover::before {
+    background-color: rgba(255,255,255,0.5);
+    content: '';
+    height: 100%;
+    left: -5000px;
+    position: absolute;
+    top: 0;
+    width: 10000px;
+    z-index: -2;
+}
+
+td:hover::after {
+    background-color: rgba(255,255,255,0.5);
+    content: '';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+}
+
+
+/* Admin Page */
+
+.adminbuttonheader {
+  display: block;
+  width: 100%;
+}
+
+.admincol h1{
+  text-align: center;
+}
+
+.adminbuttons {
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+
+.adminbuttonheader {
+  text-align: center;
+}
+
+/* Forms */
+
+.employeeform {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+legend {
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.question {
+  font-weight: bold;
+  display: inline-block;
+  width: 300px;
+  text-align: left;
+}
+
+.textBox {
+  width: 250px;
+  border-radius: 1rem;
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.cancel {
+  float: right;
+}
+
+
+
+.select {
+  width: 250px;
+  border-radius: 1rem;
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.employeeform .button {
+  width: 20%;
+}
+
+.recordformcol .button {
+  width: 20%;
+}
+
+fieldset {
+  border-radius: 1rem;
+  border: 1px solid rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.recordformcol {
+  width: 70%;
+  margin: auto;
+}
+
+.recordformcol fieldset {
+  margin: auto;
+  width: 50%;
+}
+
+.add {
+  float: left;
+}
+
+.save {
+  float: left;
+}
+
+.mod {
+  float: right;
+}
+
+/* Footer */
+
+footer {
+  text-align: left;
+  padding: 10px;
+}

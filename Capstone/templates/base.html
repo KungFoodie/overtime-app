@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="template" content="{% block keywords %}{% endblock %}" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="author" content="William Sung" />
+    <meta name="robots" content="nofollow" />
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link href="{{ url_for('static', filename='css/webdefault.css') }}" rel="stylesheet" type="text/css"/>
+    <title> {% block title %}{% endblock %}</title>
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+<div class="navbar">
+    <div class="nav">
+        {% include "nav.html" %}
+    </div>
+    <div class="logdiv">
+        {% include "login.html" %}
+    </div>
+</div>
+
+<div class="header">
+    <h1>{% block header %}{% endblock %}</h1>
+</div>
+
+<main>
+    {% block maincontent %}
+    {% endblock %}
+</main>
+<footer>
+    {% block footer %}
+    <address>
+        <div id="contact_info">
+            <p><small> Contact Information <br/>
+                Address: Example Address<br/>
+                Email: <a href="mailto:wsung@regis.edu"> wsung@regis.edu</a> <br/>
+                Phone: 333-333-333</small></p>
+        </div>
+        <div id="disclaimer">
+            <p>
+            </p>
+        </div>
+    </address>
+    {% endblock %}
+</footer>
+</body>
+</html>

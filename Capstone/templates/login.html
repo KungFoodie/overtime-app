@@ -1,0 +1,22 @@
+{% if logged is sameas true %}
+    <form action="/logout" class="logout" method="GET">
+        <input type="submit" class="logout button" value="Logout">
+    </form>
+    {% else %}
+    {% if failed is sameas true %}
+        <script>alert("Incorrect username or password.")</script>
+    {% endif %}
+    <form action="/login" class="login" method="POST">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" class="loginbox" placeholder="Enter Username" name="uname" required>
+        <br />
+        <label for="psw"><b>Password</b></label>
+        <input type="password" class="loginbox" placeholder="Enter Password" name="psw" required>
+        <br />
+        <input type="submit" class="login button" value="Login">
+    </form>
+
+{% endif %}
+
+
+

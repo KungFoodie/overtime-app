@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Add employee form" />
+    <meta name="author" content="William Sung" />
+    <meta name="robots" content="nofollow" />
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="{{ url_for('static', filename='css/webdefault.css') }}" rel="stylesheet" type="text/css"/>
+    <title> {% block title %}{% endblock %}</title>
+</head>
+<body>
+
+{% if submitted is sameas true %}
+    <script>
+        window.opener.location.reload();
+        window.close();
+
+    </script>
+{% else %}
+    <main>
+        <div class="employeeform"?>
+            <form action="/add" method="POST">
+                <fieldset name="employeeform">
+                    <legend>Add Employee</legend>
+                    <p><label class="question" for="empid" >Employee ID:&nbsp;</label>
+                    <input class="textBox" type="text" id="empid" name="empid" pattern="[0-9]{5}" title="5 Numbers Only" required placeholder="Enter Employee ID"
+                            pattern="[0-9]+" title="Only numbers" size="30" maxlength="6"></p>
+                    <p><label class="question" for="firstname">First Name:&nbsp;</label>
+                            <input id="firstname" class ="textBox" type="text" name="firstname" required placeholder="Please enter first name."
+                                   pattern="[a-zA-Z]+" title="Only characters (no symbols or numbers), required" size="30"
+                                   maxlength="20"></p>
+                    <p><label class="question" for="lastname">Last Name:&nbsp;</label>
+                            <input id="lastname" name="lastname" class ="textBox" type="text" required placeholder="Please enter last name."
+                                   pattern="[a-zA-Z\-]+"
+                                   title="Only characters and hyphens allowed (no other symbols or numbers), required" size="30"
+                                   maxlength="20"></p>
+                    <p><label class="question" for="phone">Telephone Number:&nbsp;</label>
+                            <input id="phone" class ="textBox" name="phone" type="tel" name="telephone" required placeholder="Please enter phone number."
+                                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Format: 000-000-0000" size="30" maxlength="15"></p>
+                    <p><label for="job" class="question" required>Position:&nbsp; </label>
+                            <select class="select" id="job" name="job" required>
+                                <option value="">Please Select Position</option>
+                                <option value="Tech Control">Tech Control</option>
+                                <option value="Gateway">Gateway</option>
+                            </select></p>
+                    <p><label for="shift" class="question" required>Shift:&nbsp; </label>
+                            <select class="select" id="shift" name="shift" required>
+                                <option value="">Please Select Shift</option>
+                                <option value="Weekdays">Weekdays</option>
+                                <option value="Weekends">Weekends</option>
+                            </select></p>
+                    <input type="submit" class="add button"><button class="cancel button" onclick="window.close()">Cancel</button>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+{% endif %}
+{% if errors is sameas true %}
+    <script>
+        var message = "{{ message }}";
+        window.alert(message);
+    </script>
+{% endif %}
+</body>
+</html>

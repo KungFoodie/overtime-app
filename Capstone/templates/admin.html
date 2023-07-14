@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+    {% block keywords %}administration{% endblock %}
+    {% block description %}Page for administrative functions{% endblock %}
+    {% block title %} Admin {% endblock %}
+    {% block header %}Admin{% endblock %}
+
+    {% block maincontent %}
+    <div class="row">
+        <div class="column side">
+            <div class="adminbuttons">
+                <h3 class="adminbuttonheader">Administrative Functions</h3>
+                <form class="adminforms" id="adminform" onclick="return ask_for_hours()" action="/admin" method="post">
+                    <input type="hidden" name="oper" id="oper" value="" />
+                    <input type="hidden" name="adminformid" id="adminformid" value="" />
+                    <input type="hidden" name="adminformtime" id="adminformtime" value="" />
+                </form>
+
+                <button class="admin button" onclick="ask_for_hours('add')">Add Hours</button>
+                <button class="admin button" onclick="ask_for_hours('remove')">Remove Hours</button>
+                <button class="admin button" onclick="open_page('add', 700, 400)">Add Employee</button>
+                <button class="admin button" onclick="delete_employee()">Delete Employee</button>
+                <button class="admin button" onclick="view_employee()">View/Modify Employee</button>
+                <button class="admin button" onclick="generate_report()">Generate Report</button>
+            </div>
+        </div>
+        <div class="column main">
+            <div class="admintablediv">
+                <h2>{% block tabletitle %}Employees{% endblock %}</h2>
+
+                <p>{% include "admintable.html" %}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+    {% endblock %}

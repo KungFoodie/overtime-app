@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+    {% block keywords %}{% endblock %}
+    {% block description %}{% endblock %}
+
+    {% block title %}Overtime Call System{% endblock %}
+
+    {% block header %}Overtime Call System{% endblock %}
+
+    {% block maincontent %}
+    <div class="row">
+        <div class="column side">
+            <h2>Instructions</h2>
+            <p>Call the employee at the top of the table and continue down</p>
+        </div>
+        <div class="column main">
+            <h2>{% block tabletitle %}Call List{% endblock %}</h2>
+            <h3>Gateway</h3>
+            <p>{% include "gwtable.html" %}</p>
+            <h3>Tech Control</h3>
+            <p>{% include "tctable.html" %}</p>
+        </div>
+    </div>
+
+    {% endblock %}
+
