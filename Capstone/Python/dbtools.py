@@ -2,21 +2,18 @@ import sqlite3
 import csv
 import os
 
-# get current directory
-path = os.getcwd()
+from Capstone.app import db_path, project_path
 
-# parent directory
-parent = os.path.dirname(path)
-
-# database path
-# database = parent + '\\database\\employees.sqlite'
-database = path + '\\database\\employees.sqlite'
+database = db_path()
 
 
 def connect():
+
     try:
         conn = sqlite3.connect(database)
     except sqlite3.Error as e:
+        print(database)
+        print(e)
         return e
     return conn
 
@@ -110,8 +107,9 @@ def write_to_csv(query):
     conn = connect()
     c = conn.cursor()
     c.execute(query)
+    report_path = project_path() + "\\reports\\report.csv"
     try:
-        with open("report.csv", 'w+', newline='') as file:
+        with open(report_path, 'w+', newline='') as file:
             write = csv.writer(file)
             write.writerow([i[0] for i in c.description])
             write.writerows(c)

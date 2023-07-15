@@ -1,0 +1,6 @@
+id,empid,fname,lname,phone,job,shift,call_check,hours
+16,12455,Crazy,Man,333-444-5555,Tech Control,Weekends,Yes,12455
+17,12447,Random,Person,111-111-1111,Tech Control,Weekdays,Yes,250
+18,14555,Hello,Stranger,999-888-7777,Gateway,Weekdays,Yes,0
+20,14752,Gordon,Flay,123-456-7899,Gateway,Weekdays,Yes,0
+21,12345,Yankee,Doodle,888-777-8888,Gateway,Weekends,Yes,4

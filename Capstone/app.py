@@ -10,15 +10,6 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = "!@#123$%^456"
 
-# get current directory
-path = os.getcwd()
-
-# parent directory
-parent = os.path.dirname(path)
-
-# database path
-database = parent + '\\database\\employees.sqlite'
-
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
@@ -148,6 +139,17 @@ def check_status():
     if 'logged_in' in session:
         return True
     return False
+
+
+def project_path():
+    # get absolute path
+    path = os.path.dirname(os.path.abspath(__file__))
+    return path
+
+
+def db_path():
+    db = project_path() + '\\database\\employees.sqlite'
+    return db
 
 
 if __name__ == '__main__':

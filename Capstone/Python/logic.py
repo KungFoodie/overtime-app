@@ -1,17 +1,12 @@
 import sqlite3
 from Capstone.Python import employee, linkedlist, dbtools as db
 import os
-
-# get current directory
-path = os.getcwd()
-
-# parent directory
-parent = os.path.dirname(path)
+from Capstone.app import db_path, project_path
 
 # database path
-database = parent + '\\database\\employees.sqlite'
+database = db_path()
 
-template = path
+template = project_path()
 
 def generate_list():
     emp_list = linkedlist.LinkedList()
