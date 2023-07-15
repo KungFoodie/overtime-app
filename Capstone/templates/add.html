@@ -13,7 +13,7 @@
 
 {% if submitted is sameas true %}
     <script>
-        window.opener.location.reload();
+        window.opener.location.replace(window.opener.location.href);
         window.close();
 
     </script>

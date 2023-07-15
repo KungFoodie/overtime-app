@@ -1,4 +1,4 @@
-import employee
+from Capstone.Python import employee
 
 
 class LinkedList:

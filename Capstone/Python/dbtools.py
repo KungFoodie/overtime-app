@@ -1,7 +1,15 @@
 import sqlite3
 import csv
+import os
 
-database = 'C:\\Users\\willi\\Documents\\Regis\\CS493\\Capstone\\employees.sqlite'
+# get current directory
+path = os.getcwd()
+
+# parent directory
+parent = os.path.dirname(path)
+
+# database path
+database = parent + '\\database\\employees.sqlite'
 
 def connect(db):
     return sqlite3.connect(db)

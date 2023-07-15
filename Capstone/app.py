@@ -2,17 +2,22 @@ from html import escape
 
 from flask import Flask, render_template, request, session, redirect, url_for
 
-import employee
-from database_code.checker import status
-from database_code import dbtools as db
-import logic
+from Capstone.Python.checker import status
+from Capstone.Python import logic, dbtools as db
+import os
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = "!@#123$%^456"
 
-database = 'C:\\Users\\willi\\Documents\\Regis\\CS493\\Capstone\\employees.sqlite'
+# get current directory
+path = os.getcwd()
 
+# parent directory
+parent = os.path.dirname(path)
+
+# database path
+database = parent + '\\database\\employees.sqlite'
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])

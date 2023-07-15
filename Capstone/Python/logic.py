@@ -1,11 +1,15 @@
-from database_code import dbtools as db
 import sqlite3
-import employee
-import linkedlist
+from Capstone.Python import employee, linkedlist, dbtools as db
 import os
 
-directory = os.getcwd()
-database = directory + '\\employees.sqlite'
+# get current directory
+path = os.getcwd()
+
+# parent directory
+parent = os.path.dirname(path)
+
+# database path
+database = parent + '\\database\\employees.sqlite'
 
 
 def generate_list():
@@ -69,7 +73,7 @@ def generate_list_by_job(job):
 
 def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
 
-    html = directory + '\\templates\\' + htmlname
+    html = parent + '\\templates\\' + htmlname
     if emp_list.get_node_count() == 0:
         body = "No Employees Found In System"
         with open(html, mode='w') as html:
@@ -118,7 +122,7 @@ def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
 def generate_admin_table():
     emp_list = generate_list()
 
-    html = directory + '\\templates\\admintable.html'
+    html = parent + '\\templates\\admintable.html'
     if emp_list.get_node_count() == 0:
         body = "No Employees Found In System"
         with open(html, mode='w') as html:
