@@ -9,10 +9,16 @@ path = os.getcwd()
 parent = os.path.dirname(path)
 
 # database path
-database = parent + '\\database\\employees.sqlite'
+# database = parent + '\\database\\employees.sqlite'
+database = path + '\\database\\employees.sqlite'
 
-def connect(db):
-    return sqlite3.connect(db)
+
+def connect():
+    try:
+        conn = sqlite3.connect(database)
+    except sqlite3.Error as e:
+        return e
+    return conn
 
 
 def close(conn):
@@ -21,7 +27,7 @@ def close(conn):
 
 
 def insert(empid, fname, lname, phone, job, shift, call_check, hours):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     create()
     with conn:
@@ -32,7 +38,7 @@ def insert(empid, fname, lname, phone, job, shift, call_check, hours):
 
 
 def create():
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     c.execute("""CREATE TABLE IF NOT EXISTS employee_records
                 (
@@ -51,7 +57,7 @@ def create():
 
 
 def search_by_id(search_id):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     create()
     c.execute(f"SELECT * FROM employee_records WHERE empid= ?;",(search_id,))
@@ -61,7 +67,7 @@ def search_by_id(search_id):
 
 
 def update_hours(search_id, update):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     with conn:
         c.execute(f"""UPDATE employee_records
@@ -73,7 +79,7 @@ def update_hours(search_id, update):
 
 
 def update_record(search_id, fname, lname, phone, job, shift, call, hours,):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     with conn:
         c.execute(f"""UPDATE employee_records SET 
@@ -91,7 +97,7 @@ def update_record(search_id, fname, lname, phone, job, shift, call, hours,):
 
 
 def delete_row(deleteid):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     with conn:
         c.execute(f"""DELETE FROM employee_records
@@ -101,7 +107,7 @@ def delete_row(deleteid):
 
 
 def write_to_csv(query):
-    conn = connect(database)
+    conn = connect()
     c = conn.cursor()
     c.execute(query)
     try:

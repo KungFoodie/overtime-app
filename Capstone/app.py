@@ -121,14 +121,16 @@ def login():
         uname = request.form['uname']
         psw = request.form['psw']
 
-        conn = db.connect(database)
+        conn = db.connect()
         c = conn.cursor()
         sql = f"SELECT username from users where username='{uname}' AND password='{psw}'"
         c.execute(sql)
         if c.fetchone():
             session['logged_in'] = True
+            conn.close()
             return redirect(request.referrer)
         else:
+            conn.close()
             # return redirect(request.referrer)
             return render_template('index.html', failed=True)
     else:

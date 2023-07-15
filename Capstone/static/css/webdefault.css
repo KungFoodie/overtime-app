@@ -221,8 +221,6 @@ legend {
   float: right;
 }
 
-
-
 .select {
   width: 250px;
   border-radius: 1rem;
@@ -256,7 +254,7 @@ legend {
 
 .recordformcol fieldset {
   margin: auto;
-  width: 50%;
+  width: 90%;
 }
 
 .add {

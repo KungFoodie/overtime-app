@@ -11,10 +11,11 @@ parent = os.path.dirname(path)
 # database path
 database = parent + '\\database\\employees.sqlite'
 
+template = path
 
 def generate_list():
     emp_list = linkedlist.LinkedList()
-    conn = db.connect(database)
+    conn = db.connect()
     c = conn.cursor()
     db.create()
     headers = ['key', 'empid', 'fname', 'lname', 'phone', 'job', 'shift', 'call', 'hours']
@@ -44,7 +45,7 @@ def generate_list():
 def generate_list_by_job(job):
     emp_list = linkedlist.LinkedList()
 
-    conn = db.connect(database)
+    conn = db.connect()
     c = conn.cursor()
     db.create()
     headers = ['key', 'empid', 'fname', 'lname', 'phone', 'job', 'shift', 'call', 'hours']
@@ -73,7 +74,7 @@ def generate_list_by_job(job):
 
 def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
 
-    html = parent + '\\templates\\' + htmlname
+    html = template + '\\templates\\' + htmlname
     if emp_list.get_node_count() == 0:
         body = "No Employees Found In System"
         with open(html, mode='w') as html:
@@ -122,7 +123,7 @@ def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
 def generate_admin_table():
     emp_list = generate_list()
 
-    html = parent + '\\templates\\admintable.html'
+    html = template + '\\templates\\admintable.html'
     if emp_list.get_node_count() == 0:
         body = "No Employees Found In System"
         with open(html, mode='w') as html:
@@ -170,7 +171,7 @@ def generate_admin_table():
 
 
 def mod_employee_hours(name, hours):
-    conn = sqlite3.connect(database)
+    conn = sqlite3.connect()
     c = conn.cursor()
 
     names = name.split(" ")
@@ -183,7 +184,7 @@ def mod_employee_hours(name, hours):
 
 
 def add_employee(fname, lname, phone, job, shift, call_check='Yes', hours=0):
-    conn = sqlite3.connect(database)
+    conn = sqlite3.connect()
     c = conn.cursor()
 
     db.create(c)
