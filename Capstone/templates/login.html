@@ -1,21 +1,34 @@
 {% if logged is sameas true %}
     <form action="/logout" class="logout" method="GET">
-        <input type="submit" class="logout button" value="Logout">
+        <input type="submit" class="logout" value="Logout">
     </form>
     {% else %}
     {% if failed is sameas true %}
         <script>alert("Incorrect username or password.")</script>
     {% endif %}
-    <form action="/login" class="login" method="POST">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" class="loginbox" placeholder="Enter Username" name="uname" required>
-        <br />
-        <label for="psw"><b>Password</b></label>
-        <input type="password" class="loginbox" placeholder="Enter Password" name="psw" required>
-        <br />
-        <input type="submit" class="login button" value="Login">
-    </form>
+        <button class="login-dropdown-button" onclick="show()">Login</button>
+        <div class="login-content" id="login-content">
+            <form action="/login" class="login" method="POST">
+                <fieldset class="login-inputs">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" class="loginbox" placeholder="Enter Username" name="uname" required>
+                <br />
+                <label for="psw"><b>Password</b></label>
+                <input type="password" class="loginbox" placeholder="Enter Password" name="psw" required>
+                <br />
 
+                </fieldset>
+                <input type="submit" class="login-button" value="Login">
+            </form>
+        </div>
+    <script>
+    function show() {
+      let button = document.getElementById("login-content");
+      button.classList.toggle("show");
+    }
+
+
+    </script>
 {% endif %}
 
 
