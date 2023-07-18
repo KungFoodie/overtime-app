@@ -9,7 +9,9 @@ html, body {
 }
 
 body {
+    position: relative;
     margin: 0;
+
     background: linear-gradient(45deg, #2980B9, #CCCCFF);
     background-size: cover;
     font-family: "sans-serif";
@@ -60,6 +62,7 @@ body {
     font-family: inherit;
     width: 100%;
     height: 45px;
+    font-weight: bold;
 }
 
 .login-dropdown-button:hover, .logout:hover {
@@ -73,14 +76,15 @@ body {
     position: absolute;
     width: fit-content;
     margin-top: 45px;
-    margin-right: 80px;
     z-index: 1;
-    border-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
 }
 
 .login-content label {
+    display: block;
     color: rgba(255,255,255,0.9);
-
 }
 
 .login-button {
@@ -91,13 +95,13 @@ body {
     color: rgba(255,255,255,0.9);
     background-color: inherit;
     border: 1px solid rgba(0,0,0,0.3);
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 0rem 0rem 1rem 1rem;
     cursor: pointer;
     display: inline-block;
     font-size: 1rem;
     font-weight: bold;
     font-family: "sans-serif";
+
 }
 
 .login-button:hover {
@@ -107,6 +111,10 @@ body {
 .loginbox {
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 1rem;
+}
+
+.login-content fieldset {
+    border-radius: 0rem;
 }
 
 .show {
@@ -119,6 +127,7 @@ body {
     height: 45px;
     overflow: hidden;
     background-color: rgba(0,0,0,0.7);
+    font-weight: bold;
 }
 
 .nav a {
@@ -138,8 +147,8 @@ body {
 /* Default Page Layout */
 
 .header {
-    display: inline-flex;
-    padding-left: 40%;
+    width: 100%;
+    text-align: center;
 }
 
 .column {
@@ -232,6 +241,7 @@ td:hover::after {
     align-items: center;
     justify-content: left;
     width: 100%;
+
 }
 
 .adminbuttonheader {
@@ -319,6 +329,20 @@ legend {
 /* Footer */
 
 footer {
+    position: absolute;
     text-align: left;
+    bottom: 0;
+    left: 0;
     padding: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .column {
+        width: 100%;
+    }
+
+    label.question {
+        text-align: left;
+        width: 20%;
+    }
 }
