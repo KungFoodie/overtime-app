@@ -1,7 +1,8 @@
+#   Name: William Sung
+#   Description: CS493 Capstone
+#                Database Tools
 import sqlite3
 import csv
-import os
-
 from Capstone.app import db_path, project_path
 
 database = db_path()

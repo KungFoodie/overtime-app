@@ -1,12 +1,15 @@
+#   Name: William Sung
+#   Description: CS493 Capstone
+#                App Logic
 import sqlite3
 from Capstone.Python import employee, linkedlist, dbtools as db
-import os
 from Capstone.app import db_path, project_path
 
 # database path
 database = db_path()
-
+#template start
 template = project_path()
+
 
 def generate_list():
     emp_list = linkedlist.LinkedList()

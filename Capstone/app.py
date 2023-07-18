@@ -1,7 +1,8 @@
+#   Name: William Sung
+#   Description: CS493 Capstone
+#                Flask app code
 from html import escape
-
 from flask import Flask, render_template, request, session, redirect, url_for
-
 from Capstone.Python.checker import status
 from Capstone.Python import logic, dbtools as db
 import os
@@ -9,6 +10,7 @@ import os
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = "!@#123$%^456"
+
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])

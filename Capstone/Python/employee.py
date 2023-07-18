@@ -1,3 +1,6 @@
+#   Name: William Sung
+#   Description: CS493 Capstone
+#                Employee Class
 class Employee:
     def __init__(self, empid, fname="", lname="", phone="", shift="", job="", hours=0, call="Yes"):
         self._empid = empid

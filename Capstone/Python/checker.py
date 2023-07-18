@@ -1,7 +1,6 @@
 #   Name: William Sung
-#   Date: 08/20/2022
-#   Description: CS336 Assignment# 10
-#                Session status checker
+#   Description: CS493 Capstone
+#                Status Checker
 from flask import session
 
 from functools import wraps

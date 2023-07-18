@@ -1,3 +1,6 @@
+#   Name: William Sung
+#   Description: CS493 Capstone
+#                Linked List Code
 from Capstone.Python import employee
 
 
