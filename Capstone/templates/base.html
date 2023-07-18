@@ -26,6 +26,29 @@
             {% include "login.html" %}
         </div>
     </div>
+    <label class="alertpopup" id="alertpopup">
+        <input type="checkbox" class="alertCheckbox" id="alertcheckbox" autocomplete="off" />
+        <div class="alert" id="alert">
+            <span class="alertClose" id="alertclose">X</span>
+            <span class="alertText" id="alerttext">{{ message }}<br class="clear"/></span>
+        </div>
+    </label>
+
+    {%  if alert is sameas true %}
+        <script>
+            let text = "{{ message }}";
+            document.getElementById("alert").style.display = 'block';
+            document.getElementById("alerttext").innerText = text;
+        </script>
+    {% endif %}
+
+
+    <script>
+        document.getElementById("alertcheckbox").addEventListener('change',
+        function close_alert() {
+            document.getElementById("alert").style.display = 'none';
+        });
+    </script>
 </div>
 
 <div class="header">

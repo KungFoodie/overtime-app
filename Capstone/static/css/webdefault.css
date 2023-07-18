@@ -117,6 +117,10 @@ body {
     border-radius: 0rem;
 }
 
+#display-message {
+    display: none;
+}
+
 .show {
   display: block;
 }
@@ -225,6 +229,9 @@ td:hover::after {
     z-index: -1;
 }
 
+.empty-db {
+    text-align: center;
+}
 
 /* Admin Page */
 
@@ -325,6 +332,57 @@ legend {
 .mod {
     float: right;
 }
+
+/* Alert Box */
+#alert {
+    display: none;
+    position: relative;
+    top: 10px;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 400;
+    background-color: #EFE;
+    border: 1px solid #DED;
+    color: #9A9;
+}
+
+.alertCheckbox {
+    display: none;
+}
+
+:checked + .alert {
+    display: none;
+}
+
+.alertText {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+.alertClose {
+    float: right;
+    padding-top: 5px;
+    font-size: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.info {
+    background-color: #EEE;
+    border: 1px solid #DDD;
+    color: #999;
+}
+
 
 /* Footer */
 

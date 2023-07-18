@@ -120,3 +120,36 @@ def write_to_csv(query):
         return False
 
     conn.close()
+
+
+def create_users_table():
+    conn = connect()
+    c = conn.cursor()
+    c.execute("""CREATE TABLE IF NOT EXISTS users
+                (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT,
+                    firstname TEXT,
+                    lastname TEXT,
+                    password TEXT
+                );
+                """)
+    close(conn)
+    add_user("admin", "admin", "account", "admin123")
+
+
+def add_user(username, firstname, lastname, password):
+    conn = connect()
+    c = conn.cursor()
+    create()
+    with conn:
+        c.execute(
+            "INSERT INTO users VALUES(?, ?, ?, ?, ?)",
+            (None, username, firstname, lastname, password))
+    close(conn)
+
+
+def create_new_db():
+    connect()
+    create()
+    create_users_table()

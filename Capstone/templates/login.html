@@ -6,9 +6,6 @@
         <input type="submit" class="logout" value="Logout">
     </form>
     {% else %}
-    {% if failed is sameas true %}
-        <script>alert("Incorrect username or password.")</script>
-    {% endif %}
         <button class="login-dropdown-button" onclick="show()">Login</button>
         <div class="login-content" id="login-content">
             <form action="/login" class="login" method="POST">
@@ -26,13 +23,13 @@
                 <input type="submit" class="login-button" value="Login">
             </form>
         </div>
+
     <script>
+
     function show() {
       let button = document.getElementById("login-content");
       button.classList.toggle("show");
     }
-
-
     </script>
 {% endif %}
 

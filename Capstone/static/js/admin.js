@@ -1,12 +1,18 @@
 function check_for_data() {
     let table = document.getElementById("admintable");
-
     if (table == null) {
-        alert("No Data In System");
+        display_alert("No Data In System");
         return true;
     } else {
         return false;
     }
+}
+
+function display_alert(text) {
+
+    document.getElementById("alert").style.display = 'block';
+
+    document.getElementById("alerttext").innerText = text;
 }
 
 function generate_report() {
@@ -32,14 +38,14 @@ function check_ids(id, operation, hours) {
         if (Number(table.rows[i].cells[0].innerText) == id) {
             if (operation === 'remove') {
                 if (Number(table.rows[i].cells[2].innerText) - hours < 0) {
-                    alert("Employee would be left with less than 0 hours");
+                    display_alert("Employee would be left with less than 0 hours");
                     return false;
                 }
             }
             return table.rows[i].cells[1].innerText;
         }
     }
-    alert("Employee ID not found");
+    display_alert("Employee ID not found");
     return false;
 }
 
@@ -103,7 +109,7 @@ function ask_for_hours(operation) {
     }
     let hours = Number(question1);
     if (hours <= 0) {
-        alert("Hours needs to be greater than 0");
+        display_alert("Hours needs to be greater than 0");
         return false;
     } else {
         let question2 = prompt("Enter Employee ID");
@@ -125,11 +131,9 @@ function ask_for_hours(operation) {
             form.submit();
             return true;
         } else {
-
             return false;
         }
     }
-
 }
 
 

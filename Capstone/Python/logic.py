@@ -1,13 +1,15 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                App Logic
-import sqlite3
+import sqlite3, os, shutil
 from Capstone.Python import employee, linkedlist, dbtools as db
-from Capstone.app import db_path, project_path
+from Capstone.app import db_path, project_path, time
 
 # database path
 database = db_path()
-#template start
+# backup database path
+database_backup = db_path() + ".bak"
+# template start
 template = project_path()
 
 
@@ -74,7 +76,7 @@ def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
 
     html = template + '\\templates\\' + htmlname
     if emp_list.get_node_count() == 0:
-        body = "No Employees Found In System"
+        body = "<div class='empty-db'><p>No Employees Found In System</p></div>"
         with open(html, mode='w') as html:
             html.write(body)
     else:
@@ -123,7 +125,7 @@ def generate_admin_table():
 
     html = template + '\\templates\\admintable.html'
     if emp_list.get_node_count() == 0:
-        body = "No Employees Found In System"
+        body = "<div class='empty-db'><p>No Employees Found In System</p></div>"
         with open(html, mode='w') as html:
             html.write(body)
     else:
@@ -191,3 +193,42 @@ def add_employee(fname, lname, phone, job, shift, call_check='Yes', hours=0):
 
     c.close()
     conn.close()
+
+
+def restore_backup():
+    if os.path.exists(database_backup):
+        shutil.copy(database_backup, database)
+        return True
+    else:
+        return False
+
+
+def generate_backup():
+    if os.path.exists(database):
+        shutil.copy(database, database_backup)
+        return True
+    else:
+        return False
+
+
+def backup_failover():
+    if generate_backup():
+        print("Daemon: Backup Generated")
+        return True
+    elif restore_backup():
+        print("Daemon: Backup Restored")
+        return True
+    else:
+        print("Daemon: No database or backup found")
+        return False
+
+
+def daemon_function_backup(interval):
+    while True:
+        print("Daemon: Starting database fault tolerance checks")
+        check = backup_failover()
+        if not check:
+            db.create_new_db()
+
+        print("Daemon: Finishing database fault tolerance checks")
+        time.sleep(interval)

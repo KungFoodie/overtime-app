@@ -1,11 +1,12 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                Flask app code
+import sqlite3
 from html import escape
 from flask import Flask, render_template, request, session, redirect, url_for
 from Capstone.Python.checker import status
 from Capstone.Python import logic, dbtools as db
-import os
+import os, threading, time
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -117,7 +118,12 @@ def login():
         conn = db.connect()
         c = conn.cursor()
         sql = f"SELECT username from users where username='{uname}' AND password='{psw}'"
-        c.execute(sql)
+        try:
+            c.execute(sql)
+        except sqlite3.Error as e:
+            print("Server: No table found, generated default table. Please try to login with default admin")
+            db.create_users_table()
+            return render_template('index.html', failed=True, alert=True, message="No users found in system. Default admin generated. Please try again.")
         if c.fetchone():
             session['logged_in'] = True
             conn.close()
@@ -125,7 +131,7 @@ def login():
         else:
             conn.close()
             # return redirect(request.referrer)
-            return render_template('index.html', failed=True)
+            return render_template('index.html', failed=True, alert=True, message="Incorrect Username or Password")
     else:
         return redirect(request.referrer)
 
@@ -155,4 +161,6 @@ def db_path():
 
 
 if __name__ == '__main__':
+    daemon = threading.Thread(target=logic.daemon_function_backup, args=(30, ))
+    daemon.start()
     app.run()
