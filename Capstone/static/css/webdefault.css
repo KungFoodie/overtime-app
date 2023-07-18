@@ -347,9 +347,9 @@ legend {
     cursor: pointer;
     font-family: sans-serif;
     font-weight: 400;
-    background-color: #EFE;
-    border: 1px solid #DED;
-    color: #9A9;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(100,100,100,0.8);
+    color: rgba(255,255,255,0.9);
 }
 
 .alertCheckbox {
@@ -369,8 +369,8 @@ legend {
 
 .alertClose {
     float: right;
-    padding-top: 5px;
-    font-size: 10px;
+    padding-right: 10px;
+    font-size: 15px;
 }
 
 .clear {
