@@ -390,4 +390,11 @@ footer {
         text-align: left;
         width: 20%;
     }
+
+    /* Footer */
+
+    footer {
+        position: relative;
+
+    }
 }
