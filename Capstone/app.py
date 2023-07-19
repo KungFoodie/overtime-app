@@ -6,7 +6,7 @@ from html import escape
 from flask import Flask, render_template, request, session, redirect, url_for
 from Capstone.Python.checker import status
 from Capstone.Python import logic, dbtools as db
-import os, threading, pathlib, time
+import os, threading
 
 
 app = Flask(__name__)

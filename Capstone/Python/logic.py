@@ -1,9 +1,9 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                App Logic
-import sqlite3, os, shutil
+import sqlite3, os, shutil, time
 from Capstone.Python import employee, linkedlist, dbtools as db
-from Capstone.app import db_path, project_path, time, pathlib
+from Capstone.app import db_path, project_path
 
 # database path
 database = db_path()
