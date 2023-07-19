@@ -257,11 +257,6 @@ td:hover::after {
 
 /* Forms */
 
-.employeeform {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
 legend {
     font-size: larger;
     font-weight: bolder;
@@ -292,11 +287,7 @@ legend {
     border: 1px solid rgba(0,0,0,0.1);
 }
 
-.employeeform .button {
-    width: 20%;
-}
-
-.recordformcol .button {
+.recordformcol .button, .employeeform .button {
     width: 20%;
 }
 
@@ -311,12 +302,12 @@ legend {
     font-size: 30px;
 }
 
-.recordformcol {
+.recordformcol, .employeeform{
     width: 70%;
     margin: auto;
 }
 
-.recordformcol fieldset {
+.recordformcol fieldset, .employeeform fieldset {
     margin: auto;
     width: 90%;
 }
@@ -337,16 +328,12 @@ legend {
 #alert {
     display: none;
     position: relative;
-    top: 10px;
-    left: 0;
     width: auto;
     height: auto;
     padding: 10px;
     margin: 10px;
     border-radius: 1rem;
     cursor: pointer;
-    font-family: sans-serif;
-    font-weight: 400;
     border: 1px solid rgba(0,0,0,0.1);
     background-color: rgba(100,100,100,0.8);
     color: rgba(255,255,255,0.9);

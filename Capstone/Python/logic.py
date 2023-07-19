@@ -3,12 +3,14 @@
 #                App Logic
 import sqlite3, os, shutil
 from Capstone.Python import employee, linkedlist, dbtools as db
-from Capstone.app import db_path, project_path, time
+from Capstone.app import db_path, project_path, time, pathlib
 
 # database path
 database = db_path()
 # backup database path
 database_backup = db_path() + ".bak"
+
+# database_backup = db_path() / ".bak"
 # template start
 template = project_path()
 

@@ -1,28 +1,16 @@
 <!--    Name: William Sung
         Assignment: CS493 Capstone
         Description: Add Employee Template    -->
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Add employee form" />
-    <meta name="author" content="William Sung" />
-    <meta name="robots" content="nofollow" />
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link href="{{ url_for('static', filename='css/webdefault.css') }}" rel="stylesheet" type="text/css"/>
-    <title> {% block title %}{% endblock %}</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-{% if submitted is sameas true %}
-    <script>
-        window.opener.location.replace(window.opener.location.href);
-        window.close();
+    {% block title %}Add Employee{% endblock %}
+    {% block scripts %}
 
-    </script>
-{% else %}
-    <main>
-        <div class="employeeform"?>
+    {% endblock %}
+    {% block header %}Employee Information{% endblock %}
+
+    {% block maincontent %}
+    <div class="employeeform"?>
             <form action="/add" method="POST">
                 <fieldset name="employeeform">
                     <legend>Add Employee</legend>
@@ -53,17 +41,9 @@
                                 <option value="Weekdays">Weekdays</option>
                                 <option value="Weekends">Weekends</option>
                             </select></p>
-                    <input type="submit" class="add button"><button class="cancel button" onclick="window.close()">Cancel</button>
+                    <input type="submit" class="add button"><button class="cancel button" onclick="window.location='admin'">Cancel</button>
                 </fieldset>
             </form>
         </div>
-    </main>
-{% endif %}
-{% if errors is sameas true %}
-    <script>
-        var message = "{{ message }}";
-        window.alert(message);
-    </script>
-{% endif %}
-</body>
-</html>
+
+    {% endblock %}

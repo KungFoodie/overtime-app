@@ -6,7 +6,8 @@ from html import escape
 from flask import Flask, render_template, request, session, redirect, url_for
 from Capstone.Python.checker import status
 from Capstone.Python import logic, dbtools as db
-import os, threading, time
+import os, threading, pathlib, time
+
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -99,12 +100,11 @@ def add():
         call_check = 'Yes'
         hours = 0
         if db.search_by_id(empid):
-            return render_template('add.html', logged=check_status(), submitted=False, errors=True,
-                                   message="Duplicate ID not allowed")
+            return render_template('add.html', logged=check_status(), submitted=False, alert=True, message="Duplicate Employee ID not Allowed")
         else:
             db.insert(empid, fname, lname, phone, job, shift, call_check, hours)
             logic.generate_admin_table()
-            return render_template('add.html', logged=check_status(), submitted=True)
+            return render_template('admin.html', logged=check_status())
     else:
         return render_template('add.html', logged=check_status(), submitted=False)
 
@@ -152,11 +152,16 @@ def check_status():
 def project_path():
     # get absolute path
     path = os.path.dirname(os.path.abspath(__file__))
+
+    # path = pathlib.Path(__file__).parent
     return path
 
 
 def db_path():
+
     db = project_path() + '\\database\\employees.sqlite'
+
+    # db = project_path() / 'database' / 'employees.sqlite'
     return db
 
 
