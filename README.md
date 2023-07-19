@@ -1,6 +1,6 @@
 # capstone-ot-app
 
-Regis University CS493 Capstone 
-Project Name: Overtime tracking and calling app
-Author: William Sung
-Description: Application tracks overtime hours and sorts employees by least hours worked to most.
+Regis University CS493 Capstone  \n
+Project Name: Overtime tracking and calling app \n
+Author: William Sung \n
+Description: Application tracks overtime hours and sorts employees by least hours worked to most. \n
