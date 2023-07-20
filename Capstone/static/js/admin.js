@@ -22,9 +22,11 @@ function generate_report() {
 
     let perform_oper = document.getElementById("oper");
     perform_oper.value = "generate";
+    let question1 = prompt("Enter report name");
+    let report_name = document.getElementById("adminformid");
+    report_name.value = question1;
     let form = document.getElementById("adminform");
     form.submit();
-    alert("Report Generated: report.csv");
 }
 
 function check_ids(id, operation, hours) {

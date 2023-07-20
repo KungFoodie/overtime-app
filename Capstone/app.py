@@ -13,6 +13,9 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = "!@#123$%^456"
 
+# Database Backup Interval in Seconds
+backup_interval = 30
+
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
@@ -45,8 +48,13 @@ def admin():
         elif oper == 'view':
             return redirect(url_for('record', empid=empid))
         elif oper == 'generate':
-            db.write_to_csv("SELECT * FROM employee_records")
-            return render_template('admin.html', logged=check_status())
+            report_name = escape(request.form['adminformid'])
+            errors = db.write_to_csv("SELECT * FROM employee_records", report_name)
+            if not errors:
+                return render_template('admin.html', logged=check_status(), alert=True, message="Generated Report: " + report_name  + ".csv")
+            else:
+                return render_template('admin.html', logged=check_status(), alert=True, message="Error generating "
+                                                                                                "report: " + errors)
 
     logic.generate_admin_table()
     return render_template('admin.html', logged=check_status())
@@ -123,7 +131,8 @@ def login():
         except sqlite3.Error as e:
             print("Server: No table found, generated default table. Please try to login with default admin")
             db.create_users_table()
-            return render_template('index.html', failed=True, alert=True, message="No users found in system. Default admin generated. Please try again.")
+            return render_template('index.html', failed=True, alert=True,
+                                   message="No users found in system. Default admin generated. Please try again.")
         if c.fetchone():
             session['logged_in'] = True
             conn.close()
@@ -166,6 +175,6 @@ def db_path():
 
 
 if __name__ == '__main__':
-    daemon = threading.Thread(target=logic.daemon_function_backup, args=(30, ))
+    daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
     daemon.start()
     app.run()

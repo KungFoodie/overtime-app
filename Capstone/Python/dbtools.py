@@ -104,11 +104,15 @@ def delete_row(deleteid):
     close(conn)
 
 
-def write_to_csv(query):
+def write_to_csv(query, report_name):
     conn = connect()
     c = conn.cursor()
-    c.execute(query)
-    report_path = project_path() + "\\reports\\report.csv"
+    try:
+        c.execute(query)
+    except sqlite3.Error as e:
+        conn.close()
+        return e
+    report_path = project_path() + "\\reports\\" + report_name + ".csv"
     try:
         with open(report_path, 'w+', newline='') as file:
             write = csv.writer(file)
@@ -117,9 +121,10 @@ def write_to_csv(query):
     except Exception as e:
         print("Error ", e)
         conn.close()
-        return False
+        return e
 
     conn.close()
+    return False
 
 
 def create_users_table():

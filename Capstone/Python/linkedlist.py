@@ -115,3 +115,13 @@ class LinkedList:
 
         return None
 
+    def delete(self, empid):
+        node: employee.Employee = self.head
+        while node is not None:
+            if node.get_empid() == empid:
+                temp = node.next
+                node.prev.next = temp
+                temp.prev = node.prev
+                return True
+            node = node.next
+        return None
