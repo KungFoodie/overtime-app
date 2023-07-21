@@ -12,10 +12,11 @@
         <div class="column side">
             <div class="adminbuttons">
                 <h3 class="adminbuttonheader">Administrative Functions</h3>
-                <form class="adminforms" id="adminform" onclick="return ask_for_hours()" action="/admin" method="post">
+                <form class="adminforms" id="adminform" action="/admin" method="post">
                     <input type="hidden" name="oper" id="oper" value="" />
-                    <input type="hidden" name="adminformid" id="adminformid" value="" />
-                    <input type="hidden" name="adminformtime" id="adminformtime" value="" />
+                    <input type="hidden" name="var1" id="var1" value="" />
+                    <input type="hidden" name="var2" id="var2" value="" />
+                    <input type="hidden" name="var3" id="var3" value="" />
                 </form>
 
                 <button class="admin button" onclick="ask_for_hours('add')">Add Hours</button>
@@ -32,7 +33,27 @@
 
                 <p>{% include "admintable.html" %}</p>
             </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="column main">
+            <div class="leave-div">
+                <h3>Upcoming Leave</h3>
+                <p>{% include "leave.html" %}</p>
+                <div class="leave-form-div">
+                    <form class="leave-form" id="leave-form" onsubmit="return validate_leave()" method="post">
+                        <input type="hidden" name="oper" id="oper" value="leave" />
+                        <label for="leave-id">Employee ID: </label>
+                        <input id="leave-id" name="leave-id" type="text" pattern="[0-9]{5}" title="5 Numbers Only" required placeholder="Enter Employee ID"  size="30" maxlength="5">
+                        <label for="start-date">Start:</label>
+                        <input type="date" class="date-form" id="start-date" onchange="check_start_date()" name="start-date" required>
+                        <label for="end-date">End:</label>
+                        <input type="date" class="date-form" id="end-date" onchange="check_end_date()" name="end-date" required>
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

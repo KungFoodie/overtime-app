@@ -1,6 +1,10 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                Employee Class
+import functools
+
+
+@functools.total_ordering
 class Employee:
     def __init__(self, empid, fname="", lname="", phone="", shift="", job="", hours=0, call="Yes"):
         self._empid = empid
@@ -9,15 +13,15 @@ class Employee:
         self._hours = hours
         self._shift = shift
         self._call = call
-        self.job = job
+        self._job = job
         self.next = None
         self.prev = None
 
-    def __str__(self):
-        return self._name + ' ' + str(self._hours)
+    def __int__(self):
+        return self._empid
 
     def get_job(self):
-        return self.job
+        return self._job
 
     def get_empid(self):
         return self._empid
@@ -51,3 +55,12 @@ class Employee:
 
     def get_call(self):
         return self._call
+
+    def __lt__(self, other):
+        return self.get_hours() < other.get_hours()
+
+    def __gt__(self, other):
+        return self.get_hours() > other.get_hours()
+
+    def __eq__(self, other):
+        return self.get_hours() == other.get_hours()

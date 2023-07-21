@@ -233,6 +233,10 @@ td:hover::after {
     text-align: center;
 }
 
+.no-data {
+    text-align: center;
+}
+
 /* Admin Page */
 
 .adminbuttonheader {

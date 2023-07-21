@@ -23,7 +23,7 @@ function generate_report() {
     let perform_oper = document.getElementById("oper");
     perform_oper.value = "generate";
     let question1 = prompt("Enter report name");
-    let report_name = document.getElementById("adminformid");
+    let report_name = document.getElementById("var1");
     report_name.value = question1;
     let form = document.getElementById("adminform");
     form.submit();
@@ -61,7 +61,7 @@ function view_employee() {
     }
     let empName = check_ids(Number(question1));
     if (empName) {
-        let formid = document.getElementById("adminformid");
+        let formid = document.getElementById("var1");
         formid.value = question1;
         let perform_oper = document.getElementById("oper");
         perform_oper.value = "view";
@@ -85,7 +85,7 @@ function delete_employee() {
     if (empName) {
         if (confirm("Are you sure you want to delete the following Employee?\nEmployee ID: " + question1 +
             "\nName: " + empName)) {
-            let formid = document.getElementById("adminformid");
+            let formid = document.getElementById("var1");
             formid.value = question1;
             let perform_oper = document.getElementById("oper");
             perform_oper.value = "delete";
@@ -123,9 +123,9 @@ function ask_for_hours(operation) {
         let id_check = check_ids(id, operation, hours);
 
         if (id_check) {
-            let formhours = document.getElementById("adminformtime");
+            let formhours = document.getElementById("var2");
             formhours.value = question1;
-            let formid = document.getElementById("adminformid");
+            let formid = document.getElementById("var1");
             formid.value = question2;
             let perform_oper = document.getElementById("oper");
             perform_oper.value = operation;
@@ -138,6 +138,95 @@ function ask_for_hours(operation) {
     }
 }
 
+
+function validate_leave() {
+
+    if(check_for_data()) {
+        return false;
+    }
+    let emp_id = document.getElementById("leave-id").value;
+
+    let failed = false;
+    let message = "";
+
+    if (!check_for_id(emp_id)) {
+        failed = true;
+        message += " Employee ID";
+    }
+
+    if (!check_start_date()) {
+        failed = true;
+        if (message != "") {
+            message += ", Start Date";
+        } else {
+            message += "Start Date";
+        }
+    }
+
+    if (!check_end_date()) {
+        failed = true;
+        if (message != "") {
+            message += ", End Date";
+        } else {
+            message += "End Date";
+        }
+    }
+
+    if (failed) {
+        display_alert("Please fix the following fields: " + message);
+        return false;
+    } else {
+
+        let perform_oper = document.getElementById("oper");
+        perform_oper.value = 'leave';
+
+        let form = document.getElementById("leave-form");
+        form.submit();
+        return true;
+    }
+}
+
+function check_for_id(empid) {
+
+    let table = document.getElementById("admintable");
+    let rows = table.rows.length;
+    for (let i = 1; i < rows; i++) {
+        if (Number(table.rows[i].cells[0].innerText) == Number(empid)) {
+
+            return true;
+        }
+    }
+    display_alert("Employee ID not found");
+    return false;
+}
+
+
+function check_start_date() {
+    let start_value = document.getElementById("start-date").value;
+    let start_arr = start_value.split("-");
+    let start = new Date(start_arr[0] + '/' + start_arr[1] + '/' + start_arr[2]);
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (start < today) {
+        display_alert("Invalid Start Date");
+        return false;
+    }
+    return true;
+}
+
+function check_end_date() {
+    let start_value = document.getElementById("start-date").value;
+    let start_arr = start_value.split("-");
+    let start = new Date(start_arr[0] + '/' + start_arr[1] + '/' + start_arr[2]);
+    let end_value = document.getElementById("end-date").value;
+    let end_arr = end_value.split("-");
+    let end = new Date(end_arr[0] + '/' + end_arr[1] + '/' + end_arr[2]);
+    if (end <= start) {
+        display_alert("Invalid End Date");
+        return false;
+    }
+    return true;
+}
 
 function open_page(page, w, h){
     let width = w;

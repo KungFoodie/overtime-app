@@ -1,0 +1,242 @@
+Index: Capstone/static/js/admin.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>function check_for_data() {\r\n    let table = document.getElementById(\"admintable\");\r\n    if (table == null) {\r\n        display_alert(\"No Data In System\");\r\n        return true;\r\n    } else {\r\n        return false;\r\n    }\r\n}\r\n\r\nfunction display_alert(text) {\r\n\r\n    document.getElementById(\"alert\").style.display = 'block';\r\n\r\n    document.getElementById(\"alerttext\").innerText = text;\r\n}\r\n\r\nfunction generate_report() {\r\n    if(check_for_data()) {\r\n        return false;\r\n    }\r\n\r\n    let perform_oper = document.getElementById(\"oper\");\r\n    perform_oper.value = \"generate\";\r\n    let form = document.getElementById(\"adminform\");\r\n    form.submit();\r\n    alert(\"Report Generated: report.csv\");\r\n}\r\n\r\nfunction check_ids(id, operation, hours) {\r\n    if (check_for_data()) {\r\n        return false;\r\n    }\r\n    let table = document.getElementById(\"admintable\");\r\n    let rows = table.rows.length;\r\n\r\n    for (let i = 1; i < rows; i++) {\r\n        if (Number(table.rows[i].cells[0].innerText) == id) {\r\n            if (operation === 'remove') {\r\n                if (Number(table.rows[i].cells[2].innerText) - hours < 0) {\r\n                    display_alert(\"Employee would be left with less than 0 hours\");\r\n                    return false;\r\n                }\r\n            }\r\n            return table.rows[i].cells[1].innerText;\r\n        }\r\n    }\r\n    display_alert(\"Employee ID not found\");\r\n    return false;\r\n}\r\n\r\nfunction view_employee() {\r\n    if (check_for_data()) {\r\n        return false;\r\n    }\r\n    let question1 = prompt(\"Enter ID to view\");\r\n    if (question1 === null) {\r\n        return false;\r\n    }\r\n    let empName = check_ids(Number(question1));\r\n    if (empName) {\r\n        let formid = document.getElementById(\"adminformid\");\r\n        formid.value = question1;\r\n        let perform_oper = document.getElementById(\"oper\");\r\n        perform_oper.value = \"view\";\r\n        let form = document.getElementById(\"adminform\");\r\n        form.submit();\r\n\r\n    } else {\r\n        return false;\r\n    }\r\n}\r\n\r\nfunction delete_employee() {\r\n    if (check_for_data()) {\r\n        return false;\r\n    }\r\n    let question1 = prompt(\"Enter ID to delete\");\r\n    if (question1 === null) {\r\n        return false;\r\n    }\r\n    let empName = check_ids(Number(question1));\r\n    if (empName) {\r\n        if (confirm(\"Are you sure you want to delete the following Employee?\\nEmployee ID: \" + question1 +\r\n            \"\\nName: \" + empName)) {\r\n            let formid = document.getElementById(\"adminformid\");\r\n            formid.value = question1;\r\n            let perform_oper = document.getElementById(\"oper\");\r\n            perform_oper.value = \"delete\";\r\n            let form = document.getElementById(\"adminform\");\r\n            form.submit();\r\n            window.reload();\r\n        } else {\r\n            return false;\r\n        }\r\n\r\n    } else {\r\n        return false;\r\n    }\r\n}\r\n\r\nfunction ask_for_hours(operation) {\r\n    if (check_for_data()) {\r\n        return false;\r\n    }\r\n    let question1 = prompt(\"Enter number of hours to \" + operation);\r\n    if (question1 === null) {\r\n        return false;\r\n    }\r\n    let hours = Number(question1);\r\n    if (hours <= 0) {\r\n        display_alert(\"Hours needs to be greater than 0\");\r\n        return false;\r\n    } else {\r\n        let question2 = prompt(\"Enter Employee ID\");\r\n        if (question2 === null) {\r\n            return false;\r\n        }\r\n        let id = Number(question2);\r\n\r\n        let id_check = check_ids(id, operation, hours);\r\n\r\n        if (id_check) {\r\n            let formhours = document.getElementById(\"adminformtime\");\r\n            formhours.value = question1;\r\n            let formid = document.getElementById(\"adminformid\");\r\n            formid.value = question2;\r\n            let perform_oper = document.getElementById(\"oper\");\r\n            perform_oper.value = operation;\r\n            let form = document.getElementById(\"adminform\");\r\n            form.submit();\r\n            return true;\r\n        } else {\r\n            return false;\r\n        }\r\n    }\r\n}\r\n\r\n\r\nfunction open_page(page, w, h){\r\n    let width = w;\r\n    let height = h;\r\n    let url = page;\r\n\r\n    let leftEdge = window.screenX;\r\n    let topEdge = window.screenY;\r\n\r\n    let innerWidth = window.innerWidth;\r\n    let innerHeight = window.innerHeight;\r\n\r\n    let topLoc = topEdge + ((innerHeight - height) / 2);\r\n    let leftLoc = leftEdge + ((innerWidth - width) / 2);\r\n\r\n    let windowOptions = \"menubar=no, width=\" + width + \", height=\" + height + \", top=\" + topLoc + \", left=\" + leftLoc;\r\n    window.open(url , 'url', windowOptions);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/static/js/admin.js b/Capstone/static/js/admin.js
+--- a/Capstone/static/js/admin.js	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/static/js/admin.js	(date 1689858027236)
+@@ -22,9 +22,11 @@
+ 
+     let perform_oper = document.getElementById("oper");
+     perform_oper.value = "generate";
++    let question1 = prompt("Enter report name");
++    let report_name = document.getElementById("adminformid");
++    report_name.value = question1;
+     let form = document.getElementById("adminform");
+     form.submit();
+-    alert("Report Generated: report.csv");
+ }
+ 
+ function check_ids(id, operation, hours) {
+Index: Capstone/app.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#   Name: William Sung\r\n#   Description: CS493 Capstone\r\n#                Flask app code\r\nimport sqlite3\r\nfrom html import escape\r\nfrom flask import Flask, render_template, request, session, redirect, url_for\r\nfrom Capstone.Python.checker import status\r\nfrom Capstone.Python import logic, dbtools as db\r\nimport os, threading, time\r\n\r\napp = Flask(__name__)\r\napp.config['TEMPLATES_AUTO_RELOAD'] = True\r\napp.secret_key = \"!@#123$%^456\"\r\n\r\n\r\n@app.route('/')\r\n@app.route('/index', methods=['GET', 'POST'])\r\ndef index():\r\n    gw_list = logic.generate_list_by_job(\"Gateway\")\r\n    tc_list = logic.generate_list_by_job(\"Tech Control\")\r\n    logic.generate_table_by_job(gw_list, \"gwtable.html\")\r\n    logic.generate_table_by_job(tc_list, \"tctable.html\")\r\n    return render_template(\"index.html\", logged=check_status())\r\n\r\n\r\n@app.route('/admin', methods=['GET', 'POST'])\r\n@status\r\ndef admin():\r\n    if request.method == 'POST':\r\n        oper = escape(request.form['oper'])\r\n        empid = escape(request.form['adminformid'])\r\n        if oper in ['add', 'remove', 'delete']:\r\n            if oper in ['add', 'remove']:\r\n                hours = int(escape(request.form['adminformtime']))\r\n                if oper == 'remove':\r\n                    hours = -hours\r\n                db.update_hours(empid, hours)\r\n\r\n            if oper == 'delete':\r\n                db.delete_row(int(empid))\r\n\r\n            logic.generate_admin_table()\r\n            return render_template('admin.html', logged=check_status())\r\n        elif oper == 'view':\r\n            return redirect(url_for('record', empid=empid))\r\n        elif oper == 'generate':\r\n            db.write_to_csv(\"SELECT * FROM employee_records\")\r\n            return render_template('admin.html', logged=check_status())\r\n\r\n    logic.generate_admin_table()\r\n    return render_template('admin.html', logged=check_status())\r\n\r\n\r\n@app.route('/record/<empid>', methods=['GET', 'POST'])\r\n@status\r\ndef record(empid):\r\n    if request.method == 'POST':\r\n        formid = escape(request.form['empid'])\r\n        fname = escape(request.form['firstname'])\r\n        lname = escape(request.form['lastname'])\r\n        phone = escape(request.form['phone'])\r\n        shift = escape(request.form['shift'])\r\n        job = escape(request.form['job'])\r\n        call_check = escape(request.form['call'])\r\n\r\n        hours = escape(request.form['hours'])\r\n        db.update_record(empid, fname, lname, phone, job, shift, call_check, hours)\r\n\r\n        return render_template(\"record.html\", logged=check_status(), prefillid=formid, prefillfname=fname,\r\n                               prefilllname=lname, prefillphone=phone, prefilljob=job,\r\n                               prefillshiftvalue=shift, prefillhours=hours,\r\n                               prefillshift=shift,\r\n                               prefillcall=call_check)\r\n\r\n    else:\r\n        emplist = logic.generate_list()\r\n        node = emplist.search(int(empid))\r\n        names = node.get_name().split(\" \")\r\n        fname = names[0]\r\n        lname = names[1]\r\n        job = node.get_job()\r\n        return render_template(\"record.html\", logged=check_status(), prefillid=node.get_empid(), prefillfname=fname,\r\n                               prefilllname=lname, prefillphone=node.get_phone(), prefilljobvalue=node.get_job(),\r\n                               prefilljob=job,\r\n                               prefillshiftvalue=node.get_shift(), prefillhours=node.get_hours(),\r\n                               prefillshift=node.get_shift(),\r\n                               prefillcall=node.get_call())\r\n\r\n\r\n@app.route('/add', methods=['GET', 'POST'])\r\ndef add():\r\n    if request.method == 'POST':\r\n        empid = escape(request.form['empid'])\r\n        fname = escape(request.form['firstname'])\r\n        lname = escape(request.form['lastname'])\r\n        phone = escape(request.form['phone'])\r\n        shift = escape(request.form['shift'])\r\n        job = escape(request.form['job'])\r\n        call_check = 'Yes'\r\n        hours = 0\r\n        if db.search_by_id(empid):\r\n            return render_template('add.html', logged=check_status(), submitted=False, errors=True,\r\n                                   message=\"Duplicate ID not allowed\")\r\n        else:\r\n            db.insert(empid, fname, lname, phone, job, shift, call_check, hours)\r\n            logic.generate_admin_table()\r\n            return render_template('add.html', logged=check_status(), submitted=True)\r\n    else:\r\n        return render_template('add.html', logged=check_status(), submitted=False)\r\n\r\n\r\n@app.route('/login', methods=['GET', 'POST'])\r\ndef login():\r\n    if request.method == 'POST':\r\n        uname = request.form['uname']\r\n        psw = request.form['psw']\r\n\r\n        conn = db.connect()\r\n        c = conn.cursor()\r\n        sql = f\"SELECT username from users where username='{uname}' AND password='{psw}'\"\r\n        try:\r\n            c.execute(sql)\r\n        except sqlite3.Error as e:\r\n            print(\"Server: No table found, generated default table. Please try to login with default admin\")\r\n            db.create_users_table()\r\n            return render_template('index.html', failed=True, alert=True, message=\"No users found in system. Default admin generated. Please try again.\")\r\n        if c.fetchone():\r\n            session['logged_in'] = True\r\n            conn.close()\r\n            return redirect(request.referrer)\r\n        else:\r\n            conn.close()\r\n            # return redirect(request.referrer)\r\n            return render_template('index.html', failed=True, alert=True, message=\"Incorrect Username or Password\")\r\n    else:\r\n        return redirect(request.referrer)\r\n\r\n\r\n@app.route('/logout')\r\ndef logout():\r\n    if 'logged_in' in session:\r\n        session.pop('logged_in')\r\n    return redirect(request.referrer)\r\n\r\n\r\ndef check_status():\r\n    if 'logged_in' in session:\r\n        return True\r\n    return False\r\n\r\n\r\ndef project_path():\r\n    # get absolute path\r\n    path = os.path.dirname(os.path.abspath(__file__))\r\n    return path\r\n\r\n\r\ndef db_path():\r\n    db = project_path() + '\\\\database\\\\employees.sqlite'\r\n    return db\r\n\r\n\r\nif __name__ == '__main__':\r\n    daemon = threading.Thread(target=logic.daemon_function_backup, args=(30, ))\r\n    daemon.start()\r\n    app.run()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/app.py b/Capstone/app.py
+--- a/Capstone/app.py	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/app.py	(date 1689862987115)
+@@ -12,6 +12,9 @@
+ app.config['TEMPLATES_AUTO_RELOAD'] = True
+ app.secret_key = "!@#123$%^456"
+ 
++# Database Backup Interval in Seconds
++backup_interval = 30
++
+ 
+ @app.route('/')
+ @app.route('/index', methods=['GET', 'POST'])
+@@ -44,7 +47,8 @@
+         elif oper == 'view':
+             return redirect(url_for('record', empid=empid))
+         elif oper == 'generate':
+-            db.write_to_csv("SELECT * FROM employee_records")
++            report_name = escape(request.form['adminformid'])
++            db.write_to_csv("SELECT * FROM employee_records", report_name)
+             return render_template('admin.html', logged=check_status())
+ 
+     logic.generate_admin_table()
+@@ -123,7 +127,8 @@
+         except sqlite3.Error as e:
+             print("Server: No table found, generated default table. Please try to login with default admin")
+             db.create_users_table()
+-            return render_template('index.html', failed=True, alert=True, message="No users found in system. Default admin generated. Please try again.")
++            return render_template('index.html', failed=True, alert=True,
++                                   message="No users found in system. Default admin generated. Please try again.")
+         if c.fetchone():
+             session['logged_in'] = True
+             conn.close()
+@@ -161,6 +166,6 @@
+ 
+ 
+ if __name__ == '__main__':
+-    daemon = threading.Thread(target=logic.daemon_function_backup, args=(30, ))
++    daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
+     daemon.start()
+     app.run()
+Index: Capstone/templates/add.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!--    Name: William Sung\r\n        Assignment: CS493 Capstone\r\n        Description: Add Employee Template    -->\r\n<!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"description\" content=\"Add employee form\" />\r\n    <meta name=\"author\" content=\"William Sung\" />\r\n    <meta name=\"robots\" content=\"nofollow\" />\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\r\n    <link href=\"{{ url_for('static', filename='css/webdefault.css') }}\" rel=\"stylesheet\" type=\"text/css\"/>\r\n    <title> {% block title %}{% endblock %}</title>\r\n</head>\r\n<body>\r\n\r\n{% if submitted is sameas true %}\r\n    <script>\r\n        window.opener.location.replace(window.opener.location.href);\r\n        window.close();\r\n\r\n    </script>\r\n{% else %}\r\n    <main>\r\n        <div class=\"employeeform\"?>\r\n            <form action=\"/add\" method=\"POST\">\r\n                <fieldset name=\"employeeform\">\r\n                    <legend>Add Employee</legend>\r\n                    <p><label class=\"question\" for=\"empid\" >Employee ID:&nbsp;</label>\r\n                    <input class=\"textBox\" type=\"text\" id=\"empid\" name=\"empid\" pattern=\"[0-9]{5}\" title=\"5 Numbers Only\" required placeholder=\"Enter Employee ID\"\r\n                            pattern=\"[0-9]+\" title=\"Only numbers\" size=\"30\" maxlength=\"6\"></p>\r\n                    <p><label class=\"question\" for=\"firstname\">First Name:&nbsp;</label>\r\n                            <input id=\"firstname\" class =\"textBox\" type=\"text\" name=\"firstname\" required placeholder=\"Please enter first name.\"\r\n                                   pattern=\"[a-zA-Z]+\" title=\"Only characters (no symbols or numbers), required\" size=\"30\"\r\n                                   maxlength=\"20\"></p>\r\n                    <p><label class=\"question\" for=\"lastname\">Last Name:&nbsp;</label>\r\n                            <input id=\"lastname\" name=\"lastname\" class =\"textBox\" type=\"text\" required placeholder=\"Please enter last name.\"\r\n                                   pattern=\"[a-zA-Z\\-]+\"\r\n                                   title=\"Only characters and hyphens allowed (no other symbols or numbers), required\" size=\"30\"\r\n                                   maxlength=\"20\"></p>\r\n                    <p><label class=\"question\" for=\"phone\">Telephone Number:&nbsp;</label>\r\n                            <input id=\"phone\" class =\"textBox\" name=\"phone\" type=\"tel\" name=\"telephone\" required placeholder=\"Please enter phone number.\"\r\n                                   pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" title=\"Format: 000-000-0000\" size=\"30\" maxlength=\"15\"></p>\r\n                    <p><label for=\"job\" class=\"question\" required>Position:&nbsp; </label>\r\n                            <select class=\"select\" id=\"job\" name=\"job\" required>\r\n                                <option value=\"\">Please Select Position</option>\r\n                                <option value=\"Tech Control\">Tech Control</option>\r\n                                <option value=\"Gateway\">Gateway</option>\r\n                            </select></p>\r\n                    <p><label for=\"shift\" class=\"question\" required>Shift:&nbsp; </label>\r\n                            <select class=\"select\" id=\"shift\" name=\"shift\" required>\r\n                                <option value=\"\">Please Select Shift</option>\r\n                                <option value=\"Weekdays\">Weekdays</option>\r\n                                <option value=\"Weekends\">Weekends</option>\r\n                            </select></p>\r\n                    <input type=\"submit\" class=\"add button\"><button class=\"cancel button\" onclick=\"window.close()\">Cancel</button>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n    </main>\r\n{% endif %}\r\n{% if errors is sameas true %}\r\n    <script>\r\n        var message = \"{{ message }}\";\r\n        window.alert(message);\r\n    </script>\r\n{% endif %}\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/templates/add.html b/Capstone/templates/add.html
+--- a/Capstone/templates/add.html	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/templates/add.html	(date 1689863080455)
+@@ -1,28 +1,16 @@
+ <!--    Name: William Sung
+         Assignment: CS493 Capstone
+         Description: Add Employee Template    -->
+-<!doctype html>
+-<html lang="en">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="description" content="Add employee form" />
+-    <meta name="author" content="William Sung" />
+-    <meta name="robots" content="nofollow" />
+-    <meta content="width=device-width, initial-scale=1" name="viewport">
+-    <link href="{{ url_for('static', filename='css/webdefault.css') }}" rel="stylesheet" type="text/css"/>
+-    <title> {% block title %}{% endblock %}</title>
+-</head>
+-<body>
++{% extends 'base.html' %}
+ 
+-{% if submitted is sameas true %}
+-    <script>
+-        window.opener.location.replace(window.opener.location.href);
+-        window.close();
++    {% block title %}Add Employee{% endblock %}
++    {% block scripts %}
+ 
+-    </script>
+-{% else %}
+-    <main>
+-        <div class="employeeform"?>
++    {% endblock %}
++    {% block header %}Employee Information{% endblock %}
++
++    {% block maincontent %}
++    <div class="employeeform"?>
+             <form action="/add" method="POST">
+                 <fieldset name="employeeform">
+                     <legend>Add Employee</legend>
+@@ -53,17 +41,9 @@
+                                 <option value="Weekdays">Weekdays</option>
+                                 <option value="Weekends">Weekends</option>
+                             </select></p>
+-                    <input type="submit" class="add button"><button class="cancel button" onclick="window.close()">Cancel</button>
++                    <input type="submit" class="add button"><button class="cancel button" onclick="window.location='admin'">Cancel</button>
+                 </fieldset>
+             </form>
+         </div>
+-    </main>
+-{% endif %}
+-{% if errors is sameas true %}
+-    <script>
+-        var message = "{{ message }}";
+-        window.alert(message);
+-    </script>
+-{% endif %}
+-</body>
+-</html>
+\ No newline at end of file
++
++    {% endblock %}
+\ No newline at end of file
+Index: Capstone/Python/dbtools.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#   Name: William Sung\r\n#   Description: CS493 Capstone\r\n#                Database Tools\r\nimport sqlite3\r\nimport csv\r\nfrom Capstone.app import db_path, project_path\r\n\r\ndatabase = db_path()\r\n\r\n\r\ndef connect():\r\n\r\n    try:\r\n        conn = sqlite3.connect(database)\r\n    except sqlite3.Error as e:\r\n        print(database)\r\n        print(e)\r\n        return e\r\n    return conn\r\n\r\n\r\ndef close(conn):\r\n    conn.commit()\r\n    conn.close()\r\n\r\n\r\ndef insert(empid, fname, lname, phone, job, shift, call_check, hours):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    create()\r\n    with conn:\r\n        c.execute(\r\n            \"INSERT INTO employee_records VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)\",\r\n            (None, empid, fname, lname, phone, job, shift, call_check, hours))\r\n    close(conn)\r\n\r\n\r\ndef create():\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    c.execute(\"\"\"CREATE TABLE IF NOT EXISTS employee_records\r\n                (\r\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\r\n                    empid INTEGER,\r\n                    fname TEXT,\r\n                    lname TEXT,\r\n                    phone TEXT,\r\n                    job TEXT,\r\n                    shift TEXT,\r\n                    call_check TEXT,\r\n                    hours INTEGER\r\n                );\r\n                \"\"\")\r\n    close(conn)\r\n\r\n\r\ndef search_by_id(search_id):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    create()\r\n    c.execute(f\"SELECT * FROM employee_records WHERE empid= ?;\",(search_id,))\r\n    data = c.fetchone()\r\n    close(conn)\r\n    return data\r\n\r\n\r\ndef update_hours(search_id, update):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    with conn:\r\n        c.execute(f\"\"\"UPDATE employee_records\r\n                SET hours = hours + {update}\r\n                WHERE\r\n                    empid = '{search_id}';\r\n                \"\"\")\r\n    close(conn)\r\n\r\n\r\ndef update_record(search_id, fname, lname, phone, job, shift, call, hours,):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    with conn:\r\n        c.execute(f\"\"\"UPDATE employee_records SET \r\n                hours= ?,\r\n                fname= ?,\r\n                lname= ?,\r\n                phone= ?,\r\n                job= ?,\r\n                shift= ?,\r\n                call_check=?\r\n                WHERE\r\n                    empid = '{search_id}';\r\n                \"\"\", (hours, fname, lname, phone, job, shift, call))\r\n    close(conn)\r\n\r\n\r\ndef delete_row(deleteid):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    with conn:\r\n        c.execute(f\"\"\"DELETE FROM employee_records\r\n        WHERE empid={deleteid};\r\n                \"\"\")\r\n    close(conn)\r\n\r\n\r\ndef write_to_csv(query):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    c.execute(query)\r\n    report_path = project_path() + \"\\\\reports\\\\report.csv\"\r\n    try:\r\n        with open(report_path, 'w+', newline='') as file:\r\n            write = csv.writer(file)\r\n            write.writerow([i[0] for i in c.description])\r\n            write.writerows(c)\r\n    except Exception as e:\r\n        print(\"Error \", e)\r\n        conn.close()\r\n        return False\r\n\r\n    conn.close()\r\n\r\n\r\ndef create_users_table():\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    c.execute(\"\"\"CREATE TABLE IF NOT EXISTS users\r\n                (\r\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\r\n                    username TEXT,\r\n                    firstname TEXT,\r\n                    lastname TEXT,\r\n                    password TEXT\r\n                );\r\n                \"\"\")\r\n    close(conn)\r\n    add_user(\"admin\", \"admin\", \"account\", \"admin123\")\r\n\r\n\r\ndef add_user(username, firstname, lastname, password):\r\n    conn = connect()\r\n    c = conn.cursor()\r\n    create()\r\n    with conn:\r\n        c.execute(\r\n            \"INSERT INTO users VALUES(?, ?, ?, ?, ?)\",\r\n            (None, username, firstname, lastname, password))\r\n    close(conn)\r\n\r\n\r\ndef create_new_db():\r\n    connect()\r\n    create()\r\n    create_users_table()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/Python/dbtools.py b/Capstone/Python/dbtools.py
+--- a/Capstone/Python/dbtools.py	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/Python/dbtools.py	(date 1689862906561)
+@@ -104,11 +104,15 @@
+     close(conn)
+ 
+ 
+-def write_to_csv(query):
++def write_to_csv(query, report_name):
+     conn = connect()
+     c = conn.cursor()
+-    c.execute(query)
+-    report_path = project_path() + "\\reports\\report.csv"
++    try:
++        c.execute(query)
++    except sqlite3.Error as e:
++        conn.close()
++        return e
++    report_path = project_path() + "\\reports\\" + report_name + ".csv"
+     try:
+         with open(report_path, 'w+', newline='') as file:
+             write = csv.writer(file)
+@@ -117,9 +121,10 @@
+     except Exception as e:
+         print("Error ", e)
+         conn.close()
+-        return False
++        return e
+ 
+     conn.close()
++    return False
+ 
+ 
+ def create_users_table():
+Index: Capstone/templates/admintable.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class='empty-db'><p>No Employees Found In System</p></div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/templates/admintable.html b/Capstone/templates/admintable.html
+--- a/Capstone/templates/admintable.html	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/templates/admintable.html	(date 1689858102354)
+@@ -1,1 +1,22 @@
+-<div class='empty-db'><p>No Employees Found In System</p></div>
+\ No newline at end of file
++<div class="employeetable">
++	<table id="admintable">
++		<thead>
++			<th class="colhead">Employee ID</th>
++			<th class="colhead">Name</th>
++			<th class="colhead">Hours</th>
++			<th class="colhead">Phone</th>
++			<th class="colhead">Shift</th>
++			<th class="colhead">Position</th>
++			<th class="colhead">Call Status</th>
++		</thead>
++		<tr class="roweven">
++			<td class="coleven">12345</td>
++			<td class="colodd">Bossy Boss</td>
++			<td class="coleven">0</td>
++			<td class="colodd">555-666-7777</td>
++			<td class="coleven">Weekdays</td>
++			<td class="colodd">Tech Control</td>
++			<td class="coleven">Yes</td>
++		</tr>
++	</table>
++</div>
+\ No newline at end of file
+Index: Capstone/Python/linkedlist.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#   Name: William Sung\r\n#   Description: CS493 Capstone\r\n#                Linked List Code\r\nfrom Capstone.Python import employee\r\n\r\n\r\nclass LinkedList:\r\n    def __init__(self: employee.Employee):\r\n        self.head = None\r\n        self.tail = None\r\n        self.node_count = 0\r\n\r\n    def get_node_count(self):\r\n        return self.node_count\r\n\r\n    def insert(self, node: employee.Employee):\r\n        if self.head is None:\r\n            self.head = node\r\n            self.tail = node\r\n        else:\r\n            self.tail.next = node\r\n            node.prev = self.tail\r\n            self.tail = node\r\n\r\n    def insert_order(self: employee.Employee, node: employee.Employee):\r\n        if self.head is None:\r\n            self.head = node\r\n            self.tail = node\r\n        elif self.head.get_hours() >= node.get_hours():\r\n            node.next = self.head\r\n            node.prev = None\r\n            self.head.prev = node\r\n            self.head = node\r\n        else:\r\n            curr: employee.Employee = self.head\r\n            while curr.next is not None and curr.get_hours() < node.get_hours():\r\n                curr = curr.next\r\n\r\n            if curr.get_hours() < node.get_hours():\r\n                self.tail = node\r\n                curr.next = node\r\n                node.prev = curr\r\n            else:\r\n                before = curr.prev\r\n                before.next = node\r\n                node.prev = before\r\n                node.next = curr\r\n                curr.prev = node\r\n        self.node_count = self.node_count + 1\r\n\r\n    def merge(self, a: employee.Employee, b: employee.Employee):\r\n        merged = None\r\n\r\n        if a is None:\r\n            return b\r\n        if b is None:\r\n            return a\r\n\r\n        if a.get_hours() <= b.get_hours():\r\n            merged = a\r\n            merged.next = self.merge(a.next, b)\r\n        else:\r\n            merged = b\r\n            b.next = self.merge(a, b.next)\r\n        return merged\r\n\r\n    def merge_sort(self, first_half: employee.Employee):\r\n        if first_half is None or first_half.next is None:\r\n            return first_half\r\n\r\n        middle = self.middle(first_half)\r\n        second_half = middle.next\r\n\r\n        middle.next = None\r\n\r\n        left = self.merge_sort(first_half)\r\n        right = self.merge_sort(second_half)\r\n\r\n        sorted_list = self.merge(left, right)\r\n        return sorted_list\r\n\r\n    def sort(self):\r\n        self.head = self.merge_sort(self.head)\r\n        node = self.head\r\n        while node is not None and node.next is not None:\r\n            node.next.prev = node\r\n            node = node.next\r\n        self.tail = node\r\n\r\n    def middle(self, head):\r\n        if head is None:\r\n            return head\r\n\r\n        slow = head\r\n        fast = head\r\n\r\n        while fast.next is not None and fast.next.next is not None:\r\n            slow = slow.next\r\n            fast = fast.next.next\r\n\r\n        return slow\r\n\r\n    def print(self):\r\n        node = self.head\r\n        while node is not None:\r\n            print(node)\r\n            node = node.next\r\n\r\n    def search(self, empid):\r\n        node: employee.Employee = self.head\r\n        while node is not None:\r\n            if node.get_empid() == empid:\r\n                return node\r\n            node = node.next\r\n\r\n        return None\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/Python/linkedlist.py b/Capstone/Python/linkedlist.py
+--- a/Capstone/Python/linkedlist.py	(revision 7679748e10200cc9a3d4b5074a51a55928327498)
++++ b/Capstone/Python/linkedlist.py	(date 1689713485022)
+@@ -115,3 +115,13 @@
+ 
+         return None
+ 
++    def delete(self, empid):
++        node: employee.Employee = self.head
++        while node is not None:
++            if node.get_empid() == empid:
++                temp = node.next
++                node.prev.next = temp
++                temp.prev = node.prev
++                return True
++            node = node.next
++        return None

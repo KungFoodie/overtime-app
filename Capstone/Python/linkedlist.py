@@ -5,7 +5,7 @@ from Capstone.Python import employee
 
 
 class LinkedList:
-    def __init__(self: employee.Employee):
+    def __init__(self):
         self.head = None
         self.tail = None
         self.node_count = 0
@@ -13,7 +13,7 @@ class LinkedList:
     def get_node_count(self):
         return self.node_count
 
-    def insert(self, node: employee.Employee):
+    def insert(self, node):
         if self.head is None:
             self.head = node
             self.tail = node
@@ -21,22 +21,23 @@ class LinkedList:
             self.tail.next = node
             node.prev = self.tail
             self.tail = node
+        self.node_count += 1
 
-    def insert_order(self: employee.Employee, node: employee.Employee):
+    def insert_order(self, node):
         if self.head is None:
             self.head = node
             self.tail = node
-        elif self.head.get_hours() >= node.get_hours():
+        elif self.head >= node:
             node.next = self.head
             node.prev = None
             self.head.prev = node
             self.head = node
         else:
-            curr: employee.Employee = self.head
-            while curr.next is not None and curr.get_hours() < node.get_hours():
+            curr = self.head
+            while curr.next is not None and curr < node:
                 curr = curr.next
 
-            if curr.get_hours() < node.get_hours():
+            if curr < node:
                 self.tail = node
                 curr.next = node
                 node.prev = curr
@@ -48,7 +49,7 @@ class LinkedList:
                 curr.prev = node
         self.node_count = self.node_count + 1
 
-    def merge(self, a: employee.Employee, b: employee.Employee):
+    def merge(self, a, b):
         merged = None
 
         if a is None:
@@ -56,7 +57,7 @@ class LinkedList:
         if b is None:
             return a
 
-        if a.get_hours() <= b.get_hours():
+        if a <= b:
             merged = a
             merged.next = self.merge(a.next, b)
         else:
@@ -64,7 +65,7 @@ class LinkedList:
             b.next = self.merge(a, b.next)
         return merged
 
-    def merge_sort(self, first_half: employee.Employee):
+    def merge_sort(self, first_half):
         if first_half is None or first_half.next is None:
             return first_half
 
@@ -106,19 +107,19 @@ class LinkedList:
             print(node)
             node = node.next
 
-    def search(self, empid):
-        node: employee.Employee = self.head
+    def search(self, key):
+        node = self.head
         while node is not None:
-            if node.get_empid() == empid:
+            if int(node) == key:
                 return node
             node = node.next
 
         return None
 
-    def delete(self, empid):
-        node: employee.Employee = self.head
+    def delete(self, key):
+        node = self.head
         while node is not None:
-            if node.get_empid() == empid:
+            if int(node) == key:
                 temp = node.next
                 node.prev.next = temp
                 temp.prev = node.prev

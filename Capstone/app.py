@@ -32,30 +32,59 @@ def index():
 def admin():
     if request.method == 'POST':
         oper = escape(request.form['oper'])
-        empid = escape(request.form['adminformid'])
         if oper in ['add', 'remove', 'delete']:
+            empid = escape(request.form['var1'])
             if oper in ['add', 'remove']:
-                hours = int(escape(request.form['adminformtime']))
+                hours = int(escape(request.form['var2']))
                 if oper == 'remove':
                     hours = -hours
-                db.update_hours(empid, hours)
-
+                errors = db.update_hours(empid, hours)
+                if not errors:
+                    message = "Successfully Updated Hours"
+                else:
+                    message = "Could not update hours. Error Encountered: " + str(errors)
             if oper == 'delete':
-                db.delete_row(int(empid))
+                errors = db.delete_row(int(empid))
+                if not errors:
+                    message = "Successfully Deleted Employee"
+                else:
+                    message = "Could not Delete Employee. Error Encountered: " + str(errors)
 
             logic.generate_admin_table()
-            return render_template('admin.html', logged=check_status())
+            return render_template('admin.html', logged=check_status(), alert=True, message=message)
         elif oper == 'view':
+            empid = escape(request.form['var1'])
             return redirect(url_for('record', empid=empid))
         elif oper == 'generate':
-            report_name = escape(request.form['adminformid'])
+            report_name = escape(request.form['var1'])
+            if len(report_name) == 0:
+                report_name = "default"
             errors = db.write_to_csv("SELECT * FROM employee_records", report_name)
             if not errors:
-                return render_template('admin.html', logged=check_status(), alert=True, message="Generated Report: " + report_name  + ".csv")
+                return render_template('admin.html', logged=check_status(), alert=True, message="Generated Report: " +
+                                                                                                report_name + ".csv")
             else:
                 return render_template('admin.html', logged=check_status(), alert=True, message="Error generating "
-                                                                                                "report: " + errors)
+                                                                                                "report: " + str(errors))
+        elif oper == 'leave':
+            emplist = logic.generate_list()
 
+            leave_id = escape(request.form['leave-id'])
+            node = emplist.search(int(leave_id))
+            names = node.get_name().split(" ")
+            fname = names[0]
+            lname = names[1]
+            start = escape(request.form['start-date'])
+            end = escape(request.form['end-date'])
+            errors = db.add_leave(leave_id, fname, lname, start, end)
+            if not errors:
+                message = "Successfully Added Leave"
+                logic.generate_leave_table()
+            else:
+                message = "Could not add leave. Error Encountered: " + str(errors)
+            return render_template('admin.html', logged=check_status(), alert=True, message=message)
+
+    logic.generate_leave_table()
     logic.generate_admin_table()
     return render_template('admin.html', logged=check_status())
 
@@ -110,9 +139,13 @@ def add():
         if db.search_by_id(empid):
             return render_template('add.html', logged=check_status(), submitted=False, alert=True, message="Duplicate Employee ID not Allowed")
         else:
-            db.insert(empid, fname, lname, phone, job, shift, call_check, hours)
+            errors = db.insert(empid, fname, lname, phone, job, shift, call_check, hours)
             logic.generate_admin_table()
-            return render_template('admin.html', logged=check_status())
+            if not errors:
+                return render_template('admin.html', logged=check_status())
+            else:
+                return render_template('add.html', logged=check_status(), submitted=False, alert=True,
+                                       message="Error Adding Employee: " + errors)
     else:
         return render_template('add.html', logged=check_status(), submitted=False)
 
@@ -175,6 +208,6 @@ def db_path():
 
 
 if __name__ == '__main__':
-    daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
-    daemon.start()
+    #daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
+    #daemon.start()
     app.run()
