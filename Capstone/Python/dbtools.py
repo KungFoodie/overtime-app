@@ -230,3 +230,41 @@ def add_leave(empid, firstname, lastname, startdate,enddate):
         return e
     close(conn)
     return False
+
+
+def delete_leave(delete_key):
+    conn = connect()
+    c = conn.cursor()
+    try:
+        with conn:
+            c.execute(f"""DELETE FROM leave
+            WHERE id={delete_key};
+                    """)
+    except sqlite3.Error as e:
+        close(conn)
+        return e
+
+    close(conn)
+    return False
+
+
+def update_leave(search_id, emp_id, fname, lname, start, end):
+    conn = connect()
+    c = conn.cursor()
+    try:
+        with conn:
+            c.execute(f"""UPDATE leave SET 
+                    empid= ?,
+                    fname= ?,
+                    lname= ?,
+                    start= ?,
+                    end= ?
+                    WHERE
+                        id = '{search_id}';
+                    """, (emp_id, fname, lname, start, end))
+    except sqlite3.Error as e:
+        close(conn)
+        return e
+
+    close(conn)
+    return False

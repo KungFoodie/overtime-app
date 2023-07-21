@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f07047eb-1f0d-4565-9f7d-f72c5c71492f" name="Changes" comment="Added report naming features">
-      <change afterPath="$PROJECT_DIR$/Capstone/templates/leave.html" afterDir="false" />
+    <list default="true" id="f07047eb-1f0d-4565-9f7d-f72c5c71492f" name="Changes" comment="Add leave table">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Capstone/Python/dbtools.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/Python/dbtools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/Python/employee.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/Python/employee.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/Python/linkedlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/Python/linkedlist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/Python/logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/Python/logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/reports/report.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/reports/report.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/static/css/webdefault.css" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/static/css/webdefault.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/static/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/static/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/admintable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/admintable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/gwtable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/gwtable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/record.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/record.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/tctable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/tctable.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689369085364</updated>
       <workItem from="1689369087034" duration="406000" />
-      <workItem from="1689369783826" duration="48059000" />
+      <workItem from="1689369783826" duration="48496000" />
     </task>
     <task id="LOCAL-00001" summary="Updated Comments">
       <created>1689695128054</created>
@@ -110,7 +98,21 @@
       <option name="project" value="LOCAL" />
       <updated>1689863948172</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Leave Table">
+      <created>1689902679786</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689902679786</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add leave table">
+      <created>1689902700521</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689902700521</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,7 +133,9 @@
     <MESSAGE value="Updated Comments" />
     <MESSAGE value="Updated alert coloring" />
     <MESSAGE value="Added report naming features" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added report naming features" />
+    <MESSAGE value="Add Leave Table" />
+    <MESSAGE value="Add leave table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add leave table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
