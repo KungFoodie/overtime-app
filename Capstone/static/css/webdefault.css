@@ -486,6 +486,10 @@ footer {
     background: linear-gradient(45deg, #2980B9, #CCCCFF);
 }
 
+.hide {
+    display: none;
+}
+
 .show {
   display: block;
 }

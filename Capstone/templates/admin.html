@@ -21,8 +21,6 @@
 
                 <button class="admin button" onclick="show('open-form-add-hours')">Add/Remove Hours</button>
                 <button class="admin button" onclick="window.location='/add'">Add Employee</button>
-                <button class="admin button" onclick="delete_employee()">Delete Employee</button>
-                <button class="admin button" onclick="view_employee()">View/Modify Employee</button>
                 <button class="admin button" onclick="generate_report()">Generate Report</button>
             </div>
         </div>
@@ -57,33 +55,38 @@
         <div class="popup" id="open-form-add-hours">
             <div class="popup-wrapper">
                 <div class="popup-header row">
-                    <h3 id="popup-header">Add/Remove Hours</h3>
+                    <h3 id="popup-header">Overtime</h3>
                     <span class="close" id="x-button" onclick="hide('open-form-add-hours')">&times;</span>
                 </div>
 
                 <div class="popup-content row">
+
                     <div class="form-div" id="add-hours-form-div">
                         <form class="admin-form" id="add-hours-form" onsubmit="return validate_hours()" method="post">
                             <fieldset>
                                 </p><legend>Overtime Information</legend>
                                 <p><label for="oper" class="question" required>Operation:&nbsp; </label>
-                                    <select class="select" id="oper-hours-form" name="oper" required>
+                                    <select class="select" id="oper-hours-form" name="oper" onchange="show_hours_selection()" required>
                                         <option value="" selected="selected">Please Select Operation</option>
                                         <option value="add">Add</option>
                                         <option value="remove">Remove</option>
+                                        <option value="delete">Delete</option>
+                                        <option value="view">View</option>
                                     </select></p>
                                 <label for="add-hours-id question" class="question">Employee ID: </label>
                                     <input id="add-hours-id" class="textBox" name="add-hours-id" type="text" pattern="[0-9]{5}"
                                            title="5 Numbers Only" required placeholder="Enter Employee ID"  size="30" maxlength="5"></p>
-                                <p><label class="question" for="add-hours">Hours:&nbsp;</label>
-                                        <input id="add-hours" class ="textBox" name="hours" required placeholder="Please enter hours."
-                                               type="number" min="0" size="30" maxlength="20"></p>
+                                <div id="hours-enable">
+                                    <p><label class="question" for="add-hours">Hours:&nbsp;</label>
+                                            <input id="add-hours" class ="textBox" name="hours" required placeholder="Please enter hours."
+                                                   type="number" min="0" size="30" maxlength="20"></p>
+                                </div>
                                 <input type="submit" class="submit button"><button class="cancel button" onclick="return hide('open-form-add-hours')">Cancel</button>
                             </fieldset>
                         </form>
-
                         <p>{% include "admintable.html" %}</p>
                     </div>
+
                 </div>
                 <div class="popup-footer"></div>
             </div>
@@ -96,7 +99,7 @@
             <div class="popup-wrapper">
 
                 <div class="popup-header row">
-                    <h3 id="popup-header">Add Leave</h3>
+                    <h3 id="popup-header">Leave</h3>
                     <span class="close" id="x-button" onclick="hide('open-form-add-leave')">&times;</span>
                 </div>
 

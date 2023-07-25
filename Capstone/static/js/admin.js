@@ -299,3 +299,20 @@ function check_leave_enables() {
         remove_questions.classList.add('show');
     }
 }
+
+function show_hours_selection() {
+    let selection = document.getElementById('oper-hours-form').value;
+    let add_questions = document.getElementById('hours-enable');
+    let question = document.getElementById('add-hours');
+
+    if (selection == 'add' || selection == 'remove') {
+            alert(selection);
+        add_questions.classList.add('show');
+        add_questions.classList.remove('hide');
+        question.setAttribute('required', 'required');
+    } else {
+        add_questions.classList.add('hide');
+        add_questions.classList.remove('show');
+        question.removeAttribute('required');
+    }
+}

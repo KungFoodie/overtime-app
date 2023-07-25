@@ -53,7 +53,7 @@ def admin():
             logic.generate_admin_table()
             return render_template('admin.html', logged=check_status(), alert=True, message=message)
         elif oper == 'view':
-            empid = escape(request.form['var1'])
+            empid = escape(request.form['add-hours-id'])
             return redirect(url_for('record', empid=empid))
         elif oper == 'generate':
             report_name = escape(request.form['var1'])

@@ -1,5 +1,5 @@
 import functools
-import datetime, time
+import datetime
 
 @functools.total_ordering
 class Leave:
