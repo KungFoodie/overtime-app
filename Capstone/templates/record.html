@@ -3,59 +3,75 @@
         Description: Employee record Template    -->
 {% extends 'base.html' %}
 
-    {% block title %}Employee Record{% endblock %}
-    {% block scripts %}
+{% block title %}Employee Record{% endblock %}
+{% block scripts %}
 
-    {% endblock %}
-    {% block header %}Employee Record{% endblock %}
+{% endblock %}
+{% block header %}Employee Record{% endblock %}
 
-    {% block maincontent %}
-    <div class="recordformcol">
-        <form id="recordform" method="POST" action="">
-            <fieldset name="recordform">
-                <legend>Employee Information</legend>
-                <p><label class="question" for="empid" >Employee ID:&nbsp;</label>
-                <input class="textBox" type="text" id="empid" name="empid" pattern="[0-9]{5}" title="5 Numbers Only"
-                       required placeholder="Enter Employee ID"  size="30" maxlength="5"
-                       value="{{prefillid}}" disabled></p>
-                <p><label class="question" for="firstname">First Name:&nbsp;</label>
-                        <input id="firstname" class ="textBox toggle" type="text" name="firstname" required placeholder="Please enter your first name."
-                               pattern="[a-zA-Z]+" title="Only characters (no symbols or numbers), required" size="30"
-                               maxlength="20" value="{{prefillfname}}" disabled></p>
-                <p><label class="question" for="lastname">Last Name:&nbsp;</label>
-                        <input id="lastname" name="lastname" class ="textBox toggle" type="text" required placeholder="Please enter your last name."
-                               pattern="[a-zA-Z\-]+"
-                               title="Only characters and hyphens allowed (no other symbols or numbers), required" size="30"
-                               maxlength="20" value="{{prefilllname}}" disabled></p>
-                <p><label class="question" for="phone">Telephone Number:&nbsp;</label>
-                        <input id="phone" class ="textBox toggle" name="phone" type="tel" name="telephone" required placeholder="Please enter your phone number."
-                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Format: 000-000-0000" size="30" maxlength="15"
-                               value="{{prefillphone}}" disabled></p>
-                <p><label class="question" for="hours">Overtime Hours:&nbsp;</label>
-                        <input id="hours" class ="textBox toggle" name="hours" required placeholder="Please enter overtime hours."
-                               type="number" min="0" size="30" maxlength="20"
-                               value="{{prefillhours}}" disabled></p>
-                <p><label for="job" class="question" required>Position:&nbsp; </label>
-                        <select class="select toggle" id="job" name="job" required disabled>
-                            <option value="{{prefilljob}}">{{prefilljob}}</option>
-                            <option value="Tech Control">Tech Control</option>
-                            <option value="Gateway">Gateway</option>
-                        </select></p>
-                <p><label for="shift" class="question" required>Shift:&nbsp; </label>
-                        <select class="select toggle" id="shift" name="shift" required disabled>
-                            <option value="{{prefillshiftvalue}}">{{prefillshiftvalue}}</option>
-                            <option value="Weekdays">Weekdays</option>
-                            <option value="Weekends">Weekends</option>
-                        </select></p>
-                <p><label for="call" class="question" required>Call Status:&nbsp; </label>
-                        <select class="select toggle" id="call" name="call" required disabled>
-                            <option value="{{prefillcall}}">{{prefillcall}}</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select></p>
-                <input type="submit" class="toggle save button" onclick="save()" value="Save" disabled><button type="button" class="mod button" onclick="enable()" id="mod">Modify</button>
-            </fieldset>
-        </form>
+{% block maincontent %}
+
+    <div class="popup" id="open-form-view-record">
+        <div class="popup-wrapper">
+            <div class="popup-header row">
+                <h3 id="popup-header">Add/Remove Hours</h3>
+                <span class="close" id="x-button" onclick="window.location='/admin'">&times;</span>
+            </div>
+
+            <div class="popup-content row">
+                <div class="form-div">
+                    <form id="recordform" method="POST" action="">
+                        <fieldset name="recordform">
+                            <legend>Employee Information</legend>
+                            <p><label class="question" for="empid" >Employee ID:&nbsp;</label>
+                                <input class="textBox" type="text" id="empid" name="empid" pattern="[0-9]{5}" title="5 Numbers Only"
+                                       required placeholder="Enter Employee ID"  size="30" maxlength="5"
+                                       value="{{prefillid}}" disabled></p>
+                            <p><label class="question" for="firstname">First Name:&nbsp;</label>
+                                <input id="firstname" class ="textBox toggle" type="text" name="firstname" required placeholder="Please enter your first name."
+                                       pattern="[a-zA-Z]+" title="Only characters (no symbols or numbers), required" size="30"
+                                       maxlength="20" value="{{prefillfname}}" disabled></p>
+                            <p><label class="question" for="lastname">Last Name:&nbsp;</label>
+                                <input id="lastname" name="lastname" class ="textBox toggle" type="text" required placeholder="Please enter your last name."
+                                       pattern="[a-zA-Z\-]+"
+                                       title="Only characters and hyphens allowed (no other symbols or numbers), required" size="30"
+                                       maxlength="20" value="{{prefilllname}}" disabled></p>
+                            <p><label class="question" for="phone">Telephone Number:&nbsp;</label>
+                                <input id="phone" class ="textBox toggle" name="phone" type="tel" name="telephone" required placeholder="Please enter your phone number."
+                                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Format: 000-000-0000" size="30" maxlength="15"
+                                       value="{{prefillphone}}" disabled></p>
+                            <p><label class="question" for="hours">Overtime Hours:&nbsp;</label>
+                                <input id="hours" class ="textBox toggle" name="hours" required placeholder="Please enter overtime hours."
+                                       type="number" min="0" size="30" maxlength="20"
+                                       value="{{prefillhours}}" disabled></p>
+                            <p><label for="job" class="question" required>Position:&nbsp; </label>
+                                <select class="select toggle" id="job" name="job" required disabled>
+                                    <option value="{{prefilljob}}">{{prefilljob}}</option>
+                                    <option value="Tech Control">Tech Control</option>
+                                    <option value="Gateway">Gateway</option>
+                                </select></p>
+                            <p><label for="shift" class="question" required>Shift:&nbsp; </label>
+                                <select class="select toggle" id="shift" name="shift" required disabled>
+                                    <option value="{{prefillshiftvalue}}">{{prefillshiftvalue}}</option>
+                                    <option value="Weekdays">Weekdays</option>
+                                    <option value="Weekends">Weekends</option>
+                                </select></p>
+                            <p><label for="call" class="question" required>Call Status:&nbsp; </label>
+                                <select class="select toggle" id="call" name="call" required disabled>
+                                    <option value="{{prefillcall}}">{{prefillcall}}</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select></p>
+                            <input type="submit" class="toggle submit button" onclick="save()" value="Save" disabled><button type="button" class="cancel button" onclick="enable()" id="mod">Modify</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="popup-footer"></div>
+        </div>
+    </div>
+
+
     </div>
 
     <script>
@@ -79,7 +95,13 @@
             modify.innerText = 'Cancel';
             modify.onclick= function () { window.location.reload() };
         }
+        window.onload = function () {
 
+            let form_div = document.getElementById('open-form-view-record');
+
+            form_div.classList.toggle('visible');
+
+        }
 
     </script>
-    {% endblock %}
+{% endblock %}

@@ -255,13 +255,32 @@ def update_leave(search_id, emp_id, fname, lname, start, end):
         with conn:
             c.execute(f"""UPDATE leave SET 
                     empid= ?,
-                    fname= ?,
-                    lname= ?,
+                    firstname= ?,
+                    lastname= ?,
                     start= ?,
                     end= ?
                     WHERE
                         id = '{search_id}';
                     """, (emp_id, fname, lname, start, end))
+    except sqlite3.Error as e:
+        close(conn)
+        return e
+
+    close(conn)
+    return False
+
+
+def update_leave_record(emp_id, fname, lname):
+    conn = connect()
+    c = conn.cursor()
+    try:
+        with conn:
+            c.execute(f"""UPDATE leave SET 
+                    firstname= '{fname}',
+                    lastname= '{lname}'
+                    WHERE
+                        empid = '{emp_id}';
+                    """)
     except sqlite3.Error as e:
         close(conn)
         return e

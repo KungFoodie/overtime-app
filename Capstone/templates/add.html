@@ -3,47 +3,73 @@
         Description: Add Employee Template    -->
 {% extends 'base.html' %}
 
-    {% block title %}Add Employee{% endblock %}
-    {% block scripts %}
+{% block title %}Add Employee{% endblock %}
+{% block scripts %}
 
-    {% endblock %}
-    {% block header %}Employee Information{% endblock %}
+{% endblock %}
+{% block header %}{% endblock %}
 
-    {% block maincontent %}
-    <div class="employeeform"?>
-            <form action="/add" method="POST">
-                <fieldset name="employeeform">
-                    <legend>Add Employee</legend>
-                    <p><label class="question" for="empid" >Employee ID:&nbsp;</label>
-                    <input class="textBox" type="text" id="empid" name="empid" pattern="[0-9]{5}" title="5 Numbers Only" required placeholder="Enter Employee ID"
-                            pattern="[0-9]+" title="Only numbers" size="30" maxlength="6"></p>
-                    <p><label class="question" for="firstname">First Name:&nbsp;</label>
-                            <input id="firstname" class ="textBox" type="text" name="firstname" required placeholder="Please enter first name."
-                                   pattern="[a-zA-Z]+" title="Only characters (no symbols or numbers), required" size="30"
-                                   maxlength="20"></p>
-                    <p><label class="question" for="lastname">Last Name:&nbsp;</label>
-                            <input id="lastname" name="lastname" class ="textBox" type="text" required placeholder="Please enter last name."
-                                   pattern="[a-zA-Z\-]+"
-                                   title="Only characters and hyphens allowed (no other symbols or numbers), required" size="30"
-                                   maxlength="20"></p>
-                    <p><label class="question" for="phone">Telephone Number:&nbsp;</label>
-                            <input id="phone" class ="textBox" name="phone" type="tel" name="telephone" required placeholder="Please enter phone number."
-                                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Format: 000-000-0000" size="30" maxlength="15"></p>
-                    <p><label for="job" class="question" required>Position:&nbsp; </label>
-                            <select class="select" id="job" name="job" required>
-                                <option value="">Please Select Position</option>
-                                <option value="Tech Control">Tech Control</option>
-                                <option value="Gateway">Gateway</option>
-                            </select></p>
-                    <p><label for="shift" class="question" required>Shift:&nbsp; </label>
-                            <select class="select" id="shift" name="shift" required>
-                                <option value="">Please Select Shift</option>
-                                <option value="Weekdays">Weekdays</option>
-                                <option value="Weekends">Weekends</option>
-                            </select></p>
-                    <input type="submit" class="add button"><button class="cancel button" onclick="window.location='admin'">Cancel</button>
-                </fieldset>
-            </form>
+{% block maincontent %}
+
+    <div class="popup" id="open-form-add-employee">
+        <div class="popup-wrapper">
+            <div class="popup-header row">
+                <h3 id="popup-header">Add/Remove Hours</h3>
+                <span class="close" id="x-button" onclick="window.location='admin'">&times;</span>
+            </div>
+
+            <div class="popup-content row">
+                <div class="form-div">
+                    <form action="/add" method="POST">
+                        <fieldset name="employeeform">
+                            <legend>Add Employee</legend>
+                            <p><label class="question" for="empid" >Employee ID:&nbsp;</label>
+                                <input class="textBox" type="text" id="empid" name="empid" pattern="[0-9]{5}" title="5 Numbers Only" required placeholder="Enter Employee ID"
+                                       pattern="[0-9]+" title="Only numbers" size="30" maxlength="6"></p>
+                            <p><label class="question" for="firstname">First Name:&nbsp;</label>
+                                <input id="firstname" class ="textBox" type="text" name="firstname" required placeholder="Please enter first name."
+                                       pattern="[a-zA-Z]+" title="Only characters (no symbols or numbers), required" size="30"
+                                       maxlength="20"></p>
+                            <p><label class="question" for="lastname">Last Name:&nbsp;</label>
+                                <input id="lastname" name="lastname" class ="textBox" type="text" required placeholder="Please enter last name."
+                                       pattern="[a-zA-Z\-]+"
+                                       title="Only characters and hyphens allowed (no other symbols or numbers), required" size="30"
+                                       maxlength="20"></p>
+                            <p><label class="question" for="phone">Telephone Number:&nbsp;</label>
+                                <input id="phone" class ="textBox" name="phone" type="tel" name="telephone" required placeholder="Please enter phone number."
+                                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Format: 000-000-0000" size="30" maxlength="15"></p>
+                            <p><label for="job" class="question" required>Position:&nbsp; </label>
+                                <select class="select" id="job" name="job" required>
+                                    <option value="">Please Select Position</option>
+                                    <option value="Tech Control">Tech Control</option>
+                                    <option value="Gateway">Gateway</option>
+                                </select></p>
+                            <p><label for="shift" class="question" required>Shift:&nbsp; </label>
+                                <select class="select" id="shift" name="shift" required>
+                                    <option value="">Please Select Shift</option>
+                                    <option value="Weekdays">Weekdays</option>
+                                    <option value="Weekends">Weekends</option>
+                                </select></p>
+                            <input type="submit" class="submit button"><button class="cancel button" onclick="window.location='admin'">Cancel</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="popup-footer"></div>
         </div>
+    </div>
 
-    {% endblock %}
+    <script>
+        window.onload = function () {
+
+            let form_div = document.getElementById('open-form-add-employee');
+
+            form_div.classList.toggle('visible');
+
+        }
+
+    </script>
+
+    </div>
+
+{% endblock %}

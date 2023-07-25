@@ -113,6 +113,7 @@ def record(empid):
 
         hours = escape(request.form['hours'])
         db.update_record(empid, fname, lname, phone, job, shift, call_check, hours)
+        db.update_leave_record(empid, fname, lname)
 
         return render_template("record.html", logged=check_status(), prefillid=formid, prefillfname=fname,
                                prefilllname=lname, prefillphone=phone, prefilljob=job,

@@ -393,7 +393,6 @@ footer {
 .popup {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 250ms 700ms ease;
     position: fixed;
     z-index: 1;
     padding-top: 100px;
@@ -476,7 +475,7 @@ footer {
     padding-left: 20px;
 }
 
-.popup-buttons {
+.popup-footer {
     display: block;
     position: absolute;
     left: 0;
