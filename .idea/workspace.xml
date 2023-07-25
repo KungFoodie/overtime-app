@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f07047eb-1f0d-4565-9f7d-f72c5c71492f" name="Changes" comment="Updated Layout">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7889c792-3ff6-468d-b119-fdca11bc6c51.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7889c792-3ff6-468d-b119-fdca11bc6c51.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/Python/leave.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/Python/leave.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/database/employees.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/database/employees.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/static/css/webdefault.css" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/static/css/webdefault.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/static/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/static/js/admin.js" afterDir="false" />
+    <list default="true" id="f07047eb-1f0d-4565-9f7d-f72c5c71492f" name="Changes" comment="added delete and view into popup form">
       <change beforePath="$PROJECT_DIR$/Capstone/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/admintable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/admintable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/gwtable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/gwtable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/leave.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/leave.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capstone/templates/tctable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Capstone/templates/tctable.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +75,7 @@
       <updated>1689369085364</updated>
       <workItem from="1689369087034" duration="406000" />
       <workItem from="1689369783826" duration="49132000" />
-      <workItem from="1689940891909" duration="41239000" />
+      <workItem from="1689940891909" duration="41365000" />
     </task>
     <task id="LOCAL-00001" summary="Updated Comments">
       <created>1689695128054</created>
@@ -144,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690310863246</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added delete and view into popup form">
+      <created>1690319781212</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690319781212</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +166,8 @@
     <MESSAGE value="added delete and update leave records" />
     <MESSAGE value="Updated Popup forms" />
     <MESSAGE value="Updated Layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Layout" />
+    <MESSAGE value="added delete and view into popup form" />
+    <option name="LAST_COMMIT_MESSAGE" value="added delete and view into popup form" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
