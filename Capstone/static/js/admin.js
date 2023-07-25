@@ -101,51 +101,50 @@ function delete_employee() {
     }
 }
 
-function ask_for_hours(operation) {
+
+function validate_hours() {
     if (check_for_data()) {
         return false;
     }
-    let question1 = prompt("Enter number of hours to " + operation);
-    if (question1 === null) {
-        return false;
-    }
-    let hours = Number(question1);
-    if (hours <= 0) {
-        display_alert("Hours needs to be greater than 0");
-        return false;
+    let hours = document.getElementById("add-hours").value;
+    let formid = document.getElementById("add-hours-id").value;
+    let operation = document.getElementById("oper-hours-form");
+
+    let id_num = Number(formid);
+    let hours_num = Number(hours);
+
+    let id_check = check_ids(id_num, operation.value, hours_num);
+
+    if (id_check) {
+        return true;
     } else {
-        let question2 = prompt("Enter Employee ID");
-        if (question2 === null) {
-            return false;
-        }
-        let id = Number(question2);
-
-        let id_check = check_ids(id, operation, hours);
-
-        if (id_check) {
-            let formhours = document.getElementById("var2");
-            formhours.value = question1;
-            let formid = document.getElementById("var1");
-            formid.value = question2;
-            let perform_oper = document.getElementById("oper");
-            perform_oper.value = operation;
-            let form = document.getElementById("adminform");
-            form.submit();
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
-}
 
+}
 
 function validate_leave() {
 
     if(check_for_data()) {
         return false;
     }
-    let emp_id = document.getElementById("leave-id").value;
 
+    let oper = document.getElementById('oper-leave-form').value;
+    let submit_button = document.getElementById('leave-button');
+
+    if (oper == 'leave-delete') {
+        let leave_id = document.getElementById("leave-id-delete").value;
+        if (!check_leave_id(leave_id)) {
+            return false;
+        } else {
+            let form = document.getElementById("leave-form");
+            submit_button.setAttribute('formnovalidate', 'formnovalidate');
+            form.submit();
+            return true;
+        }
+    }
+
+    let emp_id = document.getElementById("leave-id").value;
     let failed = false;
     let message = "";
 
@@ -177,13 +176,31 @@ function validate_leave() {
         return false;
     } else {
 
-        let perform_oper = document.getElementById("oper");
-        perform_oper.value = 'leave';
-
-        let form = document.getElementById("leave-form");
-        form.submit();
         return true;
     }
+}
+
+function check_leave_id(leave_id) {
+    let table = document.getElementById("leavetable");
+    let rows = table.rows.length;
+    for (let i = 1; i < rows; i++) {
+        if (Number(table.rows[i].cells[0].innerText) == Number(leave_id)) {
+
+        return true;
+        }
+    }
+    display_alert("Leave ID not found");
+    return false;
+}
+
+function delete_leave() {
+    let leave_id = document.getElementById("leave-id-delete").value;
+    if (!check_leave_id(leave_id)) {
+        return false;
+    }
+
+    let form = document.getElementById("leave-delete").value;
+    form.submit();
 }
 
 function check_for_id(empid) {
@@ -244,4 +261,41 @@ function open_page(page, w, h){
 
     let windowOptions = "menubar=no, width=" + width + ", height=" + height + ", top=" + topLoc + ", left=" + leftLoc;
     window.open(url , 'url', windowOptions);
+}
+
+function show(element) {
+    let form_div = document.getElementById(element);
+
+    form_div.classList.toggle('visible');
+}
+
+function hide(element){
+    let form_div = document.getElementById(element);
+
+    form_div.classList.toggle('visible');
+
+    return false;
+}
+
+function check_leave_enables() {
+    let selection = document.getElementById('oper-leave-form').value;
+    let add_questions = document.getElementById('date-questions');
+    let remove_questions = document.getElementById('delete-questions');
+
+
+    if (selection == 'leave') {
+        remove_questions.classList.remove('show');
+        add_questions.classList.add('show');
+        document.getElementById('leave-id-delete').removeAttribute('required');
+        document.getElementById('end-date').setAttribute('required', 'required');
+        document.getElementById('start-date').setAttribute('required', 'required');
+        document.getElementById('leave-id').setAttribute('required', 'required');
+    } else if (selection == 'leave-delete') {
+        add_questions.classList.remove('show');
+        document.getElementById('end-date').removeAttribute('required');
+        document.getElementById('start-date').removeAttribute('required');
+        document.getElementById('leave-id').removeAttribute('required');
+        document.getElementById('leave-id-delete').setAttribute('required', 'required');
+        remove_questions.classList.add('show');
+    }
 }

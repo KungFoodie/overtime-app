@@ -8,10 +8,17 @@ class Leave:
         self.empid = empid
         self.fname = fname
         self.lname = lname
-        self.start = time.strptime(start, "%Y-%m-%d")
-        self.end = time.strptime(end, "%Y-%m-%d")
+        splitdate = start.split("-")
+        self.start = datetime.date(int(splitdate[0]), int(splitdate[1]), int(splitdate[2]))
+        splitdate = end.split("-")
+        self.end = datetime.date(int(splitdate[0]), int(splitdate[1]), int(splitdate[2]))
+        diff = self.end - self.start
+        self.coverage = [0] * (diff.days + 1)
         self.next = None
         self.prev = None
+
+    def __int__(self):
+        return self.key
 
     def __gt__(self, other):
         return self.start > other.start
@@ -23,7 +30,23 @@ class Leave:
         return self.start == other.start
 
     def get_start_date(self):
-        return time.strftime('%m/%d/%Y', self.start)
+        return self.start.strftime("%m/%d/%Y")
 
     def get_end_date(self):
-        return time.strftime('%m/%d/%Y', self.end)
+        return self.end.strftime("%m/%d/%Y")
+
+    def assign_coverage(self, empid, day):
+        self.coverage[day] = empid
+
+    def get_coverage(self, day):
+        return self.coverage[day]
+
+    def fully_covered(self):
+        for i in self.coverage:
+            if i == 0:
+                return False
+        return True
+
+    def get_leave_arr(self):
+        return self.coverage
+

@@ -33,9 +33,9 @@ def admin():
     if request.method == 'POST':
         oper = escape(request.form['oper'])
         if oper in ['add', 'remove', 'delete']:
-            empid = escape(request.form['var1'])
+            empid = escape(request.form['add-hours-id'])
             if oper in ['add', 'remove']:
-                hours = int(escape(request.form['var2']))
+                hours = int(escape(request.form['hours']))
                 if oper == 'remove':
                     hours = -hours
                 errors = db.update_hours(empid, hours)
@@ -82,6 +82,16 @@ def admin():
                 logic.generate_leave_table()
             else:
                 message = "Could not add leave. Error Encountered: " + str(errors)
+            return render_template('admin.html', logged=check_status(), alert=True, message=message)
+
+        elif oper == 'leave-delete':
+            leave_id = escape(request.form['leave-id-delete'])
+            errors = db.delete_leave(leave_id)
+            if not errors:
+                message = "Successfully Deleted Leave"
+            else:
+                message = "Could not delete leave. Error Encounter: " + str(errors)
+            logic.generate_leave_table()
             return render_template('admin.html', logged=check_status(), alert=True, message=message)
 
     logic.generate_leave_table()

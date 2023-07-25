@@ -1,7 +1,7 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                App Logic
-import sqlite3, os, shutil, time
+import sqlite3, os, shutil, time, datetime
 from Capstone.Python import employee, linkedlist, dbtools as db, leave
 from Capstone.app import db_path, project_path
 
@@ -220,8 +220,8 @@ def generate_leave_table():
     leave_list: linkedlist.LinkedList = generate_leave_list()
 
     html = template + '\\templates\\leave.html'
-    page_start = "<div class=\"employeetable\">\n" \
-                 "\t<table id=\"admintable\">\n" \
+    page_start = "<div class=\"leavetable\">\n" \
+                 "\t<table id=\"leavetable\">\n" \
                  "\t\t<thead>\n" \
                  "\t\t\t<th class=\"colhead\">Leave ID</th>\n" \
                  "\t\t\t<th class=\"colhead\">Employee ID</th>\n" \
@@ -255,6 +255,48 @@ def generate_leave_table():
                     "\t\t\t<td class=\"colodd\">" + node.get_end_date() + "</td>\n" \
                     "\t\t</tr>\n"
             node = node.next
+
+    page_end = "\t</table>\n" \
+               "</div>"
+
+    page = page_start + body + page_end
+    with open(html, mode='w') as html:
+        html.write(page)
+
+
+def generate_coverage_table(leave_id):
+    list = generate_leave_list()
+    list1 = generate_list()
+    leave_record: leave.Leave = list.search(int(leave_id))
+    html = template + '\\templates\\leavecoverage.html'
+    page_start = "<div class=\"employeetable\">\n" \
+                 "\t<table id=\"admintable\">\n" \
+                 "\t\t<thead>\n" \
+                 "\t\t\t<th class=\"colhead\">Date</th>\n" \
+                 "\t\t\t<th class=\"colhead\">Employee ID</th>\n" \
+                 "\t\t\t<th class=\"colhead\">Name</th>\n" \
+                 "\t\t</thead>\n"
+    body = ""
+    arr = leave_record.get_leave_arr()
+    date = leave_record.start
+    for i in arr:
+        if i % 2 == 0:
+            rowclass = "roweven"
+        else:
+            rowclass = "rowodd"
+
+        if i != 0:
+            name = list1.search(i).get_name()
+            idnum = list1.search(i).get_empid()
+        else:
+            name = "Not Covered"
+            idnum = "N/A"
+        body += "\t\t<tr class=\"" + rowclass + "\">\n" \
+                "\t\t\t<td class=\"coleven\">" + date.strftime('%m/%d/%Y') + "</td>\n" \
+                "\t\t\t<td class=\"coleven\">" + idnum + "</td>\n" \
+                "\t\t\t<td class=\"colodd\">" + name + "</td>\n" \
+                "\t\t</tr>\n"
+        date += datetime.timedelta(days=1)
 
     page_end = "\t</table>\n" \
                "</div>"

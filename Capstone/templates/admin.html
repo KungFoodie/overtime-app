@@ -2,16 +2,16 @@
         Assignment: CS493 Capstone
         Description: Admin Template    -->
 {% extends "base.html" %}
-    {% block keywords %}administration{% endblock %}
-    {% block description %}Page for administrative functions{% endblock %}
-    {% block title %} Admin {% endblock %}
-    {% block header %}Admin{% endblock %}
+{% block keywords %}administration{% endblock %}
+{% block description %}Page for administrative functions{% endblock %}
+{% block title %} Admin {% endblock %}
+{% block header %}Admin{% endblock %}
 
-    {% block maincontent %}
+{% block maincontent %}
     <div class="row">
         <div class="column side">
             <div class="adminbuttons">
-                <h3 class="adminbuttonheader">Administrative Functions</h3>
+                <h3 class="adminbuttonheader">Overtime Functions</h3>
                 <form class="adminforms" id="adminform" action="/admin" method="post">
                     <input type="hidden" name="oper" id="oper" value="" />
                     <input type="hidden" name="var1" id="var1" value="" />
@@ -19,8 +19,7 @@
                     <input type="hidden" name="var3" id="var3" value="" />
                 </form>
 
-                <button class="admin button" onclick="ask_for_hours('add')">Add Hours</button>
-                <button class="admin button" onclick="ask_for_hours('remove')">Remove Hours</button>
+                <button class="admin button" onclick="show('open-form-add-hours')">Add/Remove Hours</button>
                 <button class="admin button" onclick="window.location='/add'">Add Employee</button>
                 <button class="admin button" onclick="delete_employee()">Delete Employee</button>
                 <button class="admin button" onclick="view_employee()">View/Modify Employee</button>
@@ -34,28 +33,110 @@
                 <p>{% include "admintable.html" %}</p>
             </div>
         </div>
+
+
     </div>
 
     <div class="row">
+        <div class="column side">
+            <div class="adminbuttons">
+                <h3 class="adminbuttonheader">Leave Functions</h3>
+                <button class="admin button" onclick="show('open-form-add-leave')">Add/Remove Leave</button>
+            </div>
+        </div>
         <div class="column main">
             <div class="leave-div">
                 <h3>Upcoming Leave</h3>
                 <p>{% include "leave.html" %}</p>
-                <div class="leave-form-div">
-                    <form class="leave-form" id="leave-form" onsubmit="return validate_leave()" method="post">
-                        <input type="hidden" name="oper" id="oper" value="leave" />
-                        <label for="leave-id">Employee ID: </label>
-                        <input id="leave-id" name="leave-id" type="text" pattern="[0-9]{5}" title="5 Numbers Only" required placeholder="Enter Employee ID"  size="30" maxlength="5">
-                        <label for="start-date">Start:</label>
-                        <input type="date" class="date-form" id="start-date" onchange="check_start_date()" name="start-date" required>
-                        <label for="end-date">End:</label>
-                        <input type="date" class="date-form" id="end-date" onchange="check_end_date()" name="end-date" required>
-                        <input type="submit">
-                    </form>
-                </div>
             </div>
         </div>
     </div>
 
+    <div class="hidden-forms">
+    <!-- add hours form -->
+        <div class="popup" id="open-form-add-hours">
+            <div class="popup-wrapper">
+                <div class="popup-header row">
+                    <h3 id="popup-header">Add/Remove Hours</h3>
+                    <span class="close" id="x-button" onclick="hide('open-form-add-hours')">&times;</span>
+                </div>
+
+                <div class="popup-content row">
+                    <div class="form-div" id="add-hours-form-div">
+                        <form class="admin-form" id="add-hours-form" onsubmit="return validate_hours()" method="post">
+                            <fieldset>
+                                </p><legend>Overtime Information</legend>
+                                <p><label for="oper" class="question" required>Operation:&nbsp; </label>
+                                    <select class="select" id="oper-hours-form" name="oper" required>
+                                        <option value="" selected="selected">Please Select Operation</option>
+                                        <option value="add">Add</option>
+                                        <option value="remove">Remove</option>
+                                    </select></p>
+                                <label for="add-hours-id question" class="question">Employee ID: </label>
+                                    <input id="add-hours-id" class="textBox" name="add-hours-id" type="text" pattern="[0-9]{5}"
+                                           title="5 Numbers Only" required placeholder="Enter Employee ID"  size="30" maxlength="5"></p>
+                                <p><label class="question" for="add-hours">Hours:&nbsp;</label>
+                                        <input id="add-hours" class ="textBox" name="hours" required placeholder="Please enter hours."
+                                               type="number" min="0" size="30" maxlength="20"></p>
+                                <input type="submit" class="submit button"><button class="cancel button" onclick="return hide('open-form-add-hours')">Cancel</button>
+                            </fieldset>
+                        </form>
+
+                        <p>{% include "admintable.html" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- add leave form -->
+        <div class="popup" id="open-form-add-leave">
+            <div class="popup-wrapper">
+
+                <div class="popup-header row">
+                    <h3 id="popup-header">Add Leave</h3>
+                    <span class="close" id="x-button" onclick="hide('open-form-add-leave')">&times;</span>
+                </div>
+
+                <div class="popup-content row">
+                    <div class="form-div" id="leave-form-add">
+                        <form class="admin-form" id="leave-form" onsubmit="return validate_leave()" method="post">
+                            <fieldset>
+                                </p><legend>Leave Information</legend>
+                                <p><label for="oper" class="question" required>Operation:&nbsp; </label>
+                                    <select class="select" id="oper-leave-form" name="oper" onchange="check_leave_enables()" required>
+                                        <option value="">Please Select Operation</option>
+                                        <option value="leave">Add</option>
+                                        <option value="leave-delete">Remove</option>
+                                    </select></p>
+
+                                <div class="date-questions" id="date-questions">
+                                    <p><label for="leave-id question" class="question">Employee ID: </label>
+                                        <input id="leave-id" class="textBox" name="leave-id" type="text" pattern="[0-9]{5}"
+                                           title="5 Numbers Only" required placeholder="Enter Employee ID"  size="30" maxlength="5"></p>
+                                    </p><label class="question" for="start-date question">Start:</label>
+                                        <input type="date" class="date-form textBox" id="start-date" onchange="check_start_date()" name="start-date" required></p>
+                                    </p><label class="question" for="end-date question">End:</label>
+                                        <input type="date" class="date-form textBox" id="end-date" onchange="check_end_date()" name="end-date" required></p>
+                                </div>
+
+                                <div class="delete-questions" id="delete-questions">
+                                        <input type="hidden" name="oper" id="oper" value="leave-delete" />
+                                        <label class="question" for="leave-id-delete">Leave ID: </label>
+                                        <input class="textBox" id="leave-id-delete" name="leave-id-delete" type="text" pattern="[0-9]" title="leave id" required placeholder="Enter Leave ID"  size="30">
+                                </div>
+                                <input id="leave-button" type="submit" class="submit button"><button class="cancel button" onclick="return hide('open-form-add-leave')">Cancel</button>
+
+                            </fieldset>
+                        </form>
+
+                        <p>{% include "leave.html" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <script src="/static/js/admin.js"></script>
-    {% endblock %}
+{% endblock %}
