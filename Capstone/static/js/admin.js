@@ -23,6 +23,9 @@ function generate_report() {
     let perform_oper = document.getElementById("oper");
     perform_oper.value = "generate";
     let question1 = prompt("Enter report name");
+    if (question1 == null) {
+        return false;
+    }
     let report_name = document.getElementById("var1");
     report_name.value = question1;
     let form = document.getElementById("adminform");

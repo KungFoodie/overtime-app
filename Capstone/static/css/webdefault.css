@@ -180,12 +180,12 @@ body {
 /* Tables */
 
 table {
+
     border-collapse: collapse;
-    overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
     width: 100%;
-
+    overflow: hidden;
 }
 
 th, td {
@@ -213,9 +213,12 @@ td:hover::before {
     top: 0;
     width: 10000px;
     z-index: -2;
+    overflow: hidden;
+
 }
 
 td:hover::after {
+    overflow: hidden;
     background-color: rgba(255,255,255,0.2);
     content: '';
     height: 10000px;
@@ -414,13 +417,17 @@ footer {
     height: 90%;
 }
 
+#popup-header {
+    width: 25%;
+    float: left;
+    font-size: x-large;
+}
+
 .close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-  color: grey;
-  float: right;
-  font-size: 35px;
+    float: right;
+    color: gray;
+    margin-right: 2%;
+  font-size: xxx-large;
   font-weight: bold;
 }
 
@@ -446,10 +453,8 @@ footer {
     left: 0;
     height: 10%;
     font-weight: bolder;
-    font-size: 40px;
     color: lightgray;
     background: linear-gradient(45deg, #2980B9, #CCCCFF);
-    align-items: center;
 }
 
 .form-div {
@@ -504,7 +509,10 @@ footer {
     width: 10%;
 }
 
-
+.employeetable, .leavetable {
+    overflow:auto;
+    height: 50%;
+}
 
 @media screen and (max-width: 1200px) {
     .column {
@@ -515,6 +523,8 @@ footer {
         text-align: left;
         width: 20%;
     }
+
+
 
     /* Footer */
 
