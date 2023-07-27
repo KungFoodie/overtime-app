@@ -1,0 +1,117 @@
+Index: Capstone/static/css/webdefault.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@charset \"UTF-8\";\r\n\r\n* {\r\n    box-sizing: border-box;\r\n}\r\n\r\nhtml, body {\r\n    height: 100%;\r\n}\r\n\r\nbody {\r\n    position: relative;\r\n    margin: 0;\r\n\r\n    background: linear-gradient(45deg, #2980B9, #CCCCFF);\r\n    background-size: cover;\r\n    font-family: \"sans-serif\";\r\n    font-weight: 100;\r\n}\r\n\r\n\r\n/* all buttons */\r\n\r\n.button {\r\n    margin: auto;\r\n    text-align: center;\r\n    padding: 6px 0px;\r\n    width: 100%;\r\n    background-color: rgba(255,255,255,0.1);\r\n    border: 1px solid rgba(0,0,0,0.1);\r\n    box-shadow: 0 0 20px rgba(0,0,0,0.1);\r\n    border-radius: 1rem;\r\n    cursor: pointer;\r\n    display: inline-block;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n\r\n}\r\n\r\n.button:hover {\r\n    background-color: rgba(255,255,255,0.5);\r\n}\r\n\r\n/* Login and Logout */\r\n.logdiv {\r\n    display: inline-flex;\r\n    float: right;\r\n    width: 10%;\r\n    height: 45px;\r\n    justify-content: center;\r\n    overflow: hidden;\r\n    margin-right: 30px;\r\n}\r\n\r\n.login-dropdown-button, .logout input {\r\n    cursor: pointer;\r\n    font-size: 16px;\r\n    color: rgba(255,255,255,0.9);\r\n    border: none;\r\n    outline: none;\r\n    background-color: inherit;\r\n    font-family: inherit;\r\n    width: 100%;\r\n    height: 45px;\r\n    font-weight: bold;\r\n}\r\n\r\n.login-dropdown-button:hover, .logout:hover {\r\n    background-color: #ddd;\r\n    color: black;\r\n}\r\n\r\n.login-content {\r\n    display: none;\r\n    background-color: rgba(55,58,73, 1);\r\n    position: absolute;\r\n    width: fit-content;\r\n    margin-top: 45px;\r\n    z-index: 1;\r\n    border-bottom-left-radius: 1rem;\r\n    border-bottom-right-radius: 1rem;\r\n\r\n}\r\n\r\n.login-content label {\r\n    display: block;\r\n    color: rgba(255,255,255,0.9);\r\n}\r\n\r\n.login-button {\r\n    margin: auto;\r\n    text-align: center;\r\n    padding: 6px 0px;\r\n    width: 100%;\r\n    color: rgba(255,255,255,0.9);\r\n    background-color: inherit;\r\n    border: 1px solid rgba(0,0,0,0.3);\r\n    border-radius: 0rem 0rem 1rem 1rem;\r\n    cursor: pointer;\r\n    display: inline-block;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n    font-family: \"sans-serif\";\r\n\r\n}\r\n\r\n.login-button:hover {\r\n    background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n.loginbox {\r\n    border: 1px solid rgba(0,0,0,0.1);\r\n    border-radius: 1rem;\r\n}\r\n\r\n.login-content fieldset {\r\n    border-radius: 0rem;\r\n}\r\n\r\n#display-message {\r\n    display: none;\r\n}\r\n\r\n.show {\r\n  display: block;\r\n}\r\n\r\n/* Navigation Bar */\r\n\r\n.nav {\r\n    height: 45px;\r\n    overflow: hidden;\r\n    background-color: rgba(0,0,0,0.7);\r\n    font-weight: bold;\r\n}\r\n\r\n.nav a {\r\n    float: left;\r\n    display: block;\r\n    color: rgba(255,255,255,0.9);\r\n    text-align: center;\r\n    padding: 14px 16px;\r\n    text-decoration: none;\r\n}\r\n\r\n.nav a:hover {\r\n    background-color: #ddd;\r\n    color: black;\r\n}\r\n\r\n/* Default Page Layout */\r\n\r\n.header {\r\n    width: 100%;\r\n    text-align: center;\r\n}\r\n\r\n.column {\r\n    margin: auto;\r\n    padding: 15px;\r\n}\r\n\r\n.side {\r\n    float: left;\r\n    width: 15%;\r\n}\r\n\r\n.main {\r\n    width: 70%;\r\n}\r\n\r\n.main h2 {\r\n\r\n    text-align: center;\r\n}\r\n\r\n.row::after {\r\n    content: \"\";\r\n    display: table;\r\n    clear: both;\r\n}\r\n\r\n/* Tables */\r\n\r\ntable {\r\n    border-collapse: collapse;\r\n    overflow: hidden;\r\n    border-radius: 1rem;\r\n    box-shadow: 0 0 20px rgba(0,0,0,0.1);\r\n    width: 100%;\r\n\r\n}\r\n\r\nth, td {\r\n    padding: 15px;\r\n    background-color: rgba(255,255,255,0.2);\r\n    color: black;\r\n    position: relative;\r\n}\r\n\r\nth {\r\n    text-align: left;\r\n}\r\n\r\nthead, th {\r\n    color: rgba(255,255,255,0.9);\r\n    background-color: rgba(0,0,0,0.4);\r\n}\r\n\r\ntd:hover::before {\r\n    background-color: rgba(255,255,255,0.2);\r\n    content: '';\r\n    height: 100%;\r\n    left: -5000px;\r\n    position: absolute;\r\n    top: 0;\r\n    width: 10000px;\r\n    z-index: -2;\r\n}\r\n\r\ntd:hover::after {\r\n    background-color: rgba(255,255,255,0.2);\r\n    content: '';\r\n    height: 10000px;\r\n    left: 0;\r\n    position: absolute;\r\n    top: -5000px;\r\n    width: 100%;\r\n    z-index: -1;\r\n}\r\n\r\n.empty-db {\r\n    text-align: center;\r\n}\r\n\r\n/* Admin Page */\r\n\r\n.adminbuttonheader {\r\n    display: block;\r\n    width: 100%;\r\n}\r\n\r\n.admincol h1{\r\n    text-align: center;\r\n}\r\n\r\n.adminbuttons {\r\n    align-items: center;\r\n    justify-content: left;\r\n    width: 100%;\r\n\r\n}\r\n\r\n.adminbuttonheader {\r\n    text-align: center;\r\n}\r\n\r\n/* Forms */\r\n\r\nlegend {\r\n    font-size: larger;\r\n    font-weight: bolder;\r\n}\r\n\r\n.question {\r\n    font-weight: bold;\r\n    display: inline-block;\r\n    width: 300px;\r\n    text-align: left;\r\n}\r\n\r\n.textBox {\r\n    width: 250px;\r\n    border-radius: 1rem;\r\n    background-color: rgba(255,255,255,0.9);\r\n    border: 1px solid rgba(0,0,0,0.1);\r\n}\r\n\r\n.cancel {\r\n    float: right;\r\n}\r\n\r\n.select {\r\n    width: 250px;\r\n    border-radius: 1rem;\r\n    background-color: rgba(255,255,255,0.9);\r\n    border: 1px solid rgba(0,0,0,0.1);\r\n}\r\n\r\n.recordformcol .button, .employeeform .button {\r\n    width: 20%;\r\n}\r\n\r\nfieldset {\r\n    border-radius: 1rem;\r\n    border: 1px solid rgba(0,0,0,0.2);\r\n    text-align: center;\r\n}\r\n\r\nlegend {\r\n    font-weight: bold;\r\n    font-size: 30px;\r\n}\r\n\r\n.recordformcol, .employeeform{\r\n    width: 70%;\r\n    margin: auto;\r\n}\r\n\r\n.recordformcol fieldset, .employeeform fieldset {\r\n    margin: auto;\r\n    width: 90%;\r\n}\r\n\r\n.add {\r\n    float: left;\r\n}\r\n\r\n.save {\r\n    float: left;\r\n}\r\n\r\n.mod {\r\n    float: right;\r\n}\r\n\r\n/* Alert Box */\r\n#alert {\r\n    display: none;\r\n    position: relative;\r\n    width: auto;\r\n    height: auto;\r\n    padding: 10px;\r\n    margin: 10px;\r\n    border-radius: 1rem;\r\n    cursor: pointer;\r\n    border: 1px solid rgba(0,0,0,0.1);\r\n    background-color: rgba(100,100,100,0.8);\r\n    color: rgba(255,255,255,0.9);\r\n}\r\n\r\n.alertCheckbox {\r\n    display: none;\r\n}\r\n\r\n:checked + .alert {\r\n    display: none;\r\n}\r\n\r\n.alertText {\r\n    display: table;\r\n    margin: 0 auto;\r\n    text-align: center;\r\n    font-size: 16px;\r\n}\r\n\r\n.alertClose {\r\n    float: right;\r\n    padding-right: 10px;\r\n    font-size: 15px;\r\n}\r\n\r\n.clear {\r\n    clear: both;\r\n}\r\n\r\n.info {\r\n    background-color: #EEE;\r\n    border: 1px solid #DDD;\r\n    color: #999;\r\n}\r\n\r\n\r\n/* Footer */\r\n\r\nfooter {\r\n    position: absolute;\r\n    text-align: left;\r\n    bottom: 0;\r\n    left: 0;\r\n    padding: 10px;\r\n}\r\n\r\n@media screen and (max-width: 1200px) {\r\n    .column {\r\n        width: 100%;\r\n    }\r\n\r\n    label.question {\r\n        text-align: left;\r\n        width: 20%;\r\n    }\r\n\r\n    /* Footer */\r\n\r\n    footer {\r\n        position: relative;\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/static/css/webdefault.css b/Capstone/static/css/webdefault.css
+--- a/Capstone/static/css/webdefault.css	(revision 775e74f8620d9c6ffda8277730a916dc34e4e76b)
++++ b/Capstone/static/css/webdefault.css	(date 1689780692390)
+@@ -11,7 +11,6 @@
+ body {
+     position: relative;
+     margin: 0;
+-
+     background: linear-gradient(45deg, #2980B9, #CCCCFF);
+     background-size: cover;
+     font-family: "sans-serif";
+Index: Capstone/reports/report.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id,empid,fname,lname,phone,job,shift,call_check,hours\r\n3,14444,Hello,Moto,555-555-5555,Tech Control,Weekdays,Yes,0\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/reports/report.csv b/Capstone/reports/report.csv
+--- a/Capstone/reports/report.csv	(revision 775e74f8620d9c6ffda8277730a916dc34e4e76b)
++++ b/Capstone/reports/report.csv	(date 1689780181636)
+@@ -1,2 +1,2 @@
+ id,empid,fname,lname,phone,job,shift,call_check,hours
+-3,14444,Hello,Moto,555-555-5555,Tech Control,Weekdays,Yes,0
++1,12345,Hugo,Chavez,555-555-5555,Tech Control,Weekends,No,0
+Index: Capstone/templates/gwtable.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"employeetable\">\r\n\t<table>\r\n\t\t<thead>\r\n\t\t\t<th class=\"colhead\">Employee ID</th>\r\n\t\t\t<th class=\"colhead\">Name</th>\r\n\t\t\t<th class=\"colhead\">Hours</th>\r\n\t\t\t<th class=\"colhead\">Phone</th>\r\n\t\t\t<th class=\"colhead\">Shift</th>\r\n\t\t</thead>\r\n\t\t<tr class=\"roweven\">\r\n\t\t\t<td class=\"coleven\">14444</td>\r\n\t\t\t<td class=\"colodd\">Hello Moto</td>\r\n\t\t\t<td class=\"coleven\">0</td>\r\n\t\t\t<td class=\"colodd\">555-555-5555</td>\r\n\t\t\t<td class=\"coleven\">Weekdays</td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/templates/gwtable.html b/Capstone/templates/gwtable.html
+--- a/Capstone/templates/gwtable.html	(revision 775e74f8620d9c6ffda8277730a916dc34e4e76b)
++++ b/Capstone/templates/gwtable.html	(date 1689799232995)
+@@ -1,18 +1,1 @@
+-<div class="employeetable">
+-	<table>
+-		<thead>
+-			<th class="colhead">Employee ID</th>
+-			<th class="colhead">Name</th>
+-			<th class="colhead">Hours</th>
+-			<th class="colhead">Phone</th>
+-			<th class="colhead">Shift</th>
+-		</thead>
+-		<tr class="roweven">
+-			<td class="coleven">14444</td>
+-			<td class="colodd">Hello Moto</td>
+-			<td class="coleven">0</td>
+-			<td class="colodd">555-555-5555</td>
+-			<td class="coleven">Weekdays</td>
+-		</tr>
+-	</table>
+-</div>
+\ No newline at end of file
++<div class='empty-db'><p>No Employees Found In System</p></div>
+\ No newline at end of file
+Index: Capstone/templates/tctable.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"employeetable\">\r\n\t<table>\r\n\t\t<thead>\r\n\t\t\t<th class=\"colhead\">Employee ID</th>\r\n\t\t\t<th class=\"colhead\">Name</th>\r\n\t\t\t<th class=\"colhead\">Hours</th>\r\n\t\t\t<th class=\"colhead\">Phone</th>\r\n\t\t\t<th class=\"colhead\">Shift</th>\r\n\t\t</thead>\r\n\t\t<tr class=\"roweven\">\r\n\t\t\t<td class=\"coleven\">12345</td>\r\n\t\t\t<td class=\"colodd\">Hugo Chavez</td>\r\n\t\t\t<td class=\"coleven\">0</td>\r\n\t\t\t<td class=\"colodd\">555-555-5555</td>\r\n\t\t\t<td class=\"coleven\">Weekdays</td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/templates/tctable.html b/Capstone/templates/tctable.html
+--- a/Capstone/templates/tctable.html	(revision 775e74f8620d9c6ffda8277730a916dc34e4e76b)
++++ b/Capstone/templates/tctable.html	(date 1689799233001)
+@@ -8,8 +8,8 @@
+ 			<th class="colhead">Shift</th>
+ 		</thead>
+ 		<tr class="roweven">
+-			<td class="coleven">12345</td>
+-			<td class="colodd">Hugo Chavez</td>
++			<td class="coleven">14444</td>
++			<td class="colodd">Hello Moto</td>
+ 			<td class="coleven">0</td>
+ 			<td class="colodd">555-555-5555</td>
+ 			<td class="coleven">Weekdays</td>
+Index: Capstone/templates/admintable.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"employeetable\">\r\n\t<table id=\"admintable\">\r\n\t\t<thead>\r\n\t\t\t<th class=\"colhead\">Employee ID</th>\r\n\t\t\t<th class=\"colhead\">Name</th>\r\n\t\t\t<th class=\"colhead\">Hours</th>\r\n\t\t\t<th class=\"colhead\">Phone</th>\r\n\t\t\t<th class=\"colhead\">Shift</th>\r\n\t\t\t<th class=\"colhead\">Position</th>\r\n\t\t\t<th class=\"colhead\">Call Status</th>\r\n\t\t</thead>\r\n\t\t<tr class=\"roweven\">\r\n\t\t\t<td class=\"coleven\">14444</td>\r\n\t\t\t<td class=\"colodd\">Hello Moto</td>\r\n\t\t\t<td class=\"coleven\">0</td>\r\n\t\t\t<td class=\"colodd\">555-555-5555</td>\r\n\t\t\t<td class=\"coleven\">Weekdays</td>\r\n\t\t\t<td class=\"colodd\">Gateway</td>\r\n\t\t\t<td class=\"coleven\">Yes</td>\r\n\t\t</tr>\r\n\t\t<tr class=\"rowodd\">\r\n\t\t\t<td class=\"coleven\">12345</td>\r\n\t\t\t<td class=\"colodd\">Hugo Chavez</td>\r\n\t\t\t<td class=\"coleven\">0</td>\r\n\t\t\t<td class=\"colodd\">555-555-5555</td>\r\n\t\t\t<td class=\"coleven\">Weekdays</td>\r\n\t\t\t<td class=\"colodd\">Tech Control</td>\r\n\t\t\t<td class=\"coleven\">Yes</td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Capstone/templates/admintable.html b/Capstone/templates/admintable.html
+--- a/Capstone/templates/admintable.html	(revision 775e74f8620d9c6ffda8277730a916dc34e4e76b)
++++ b/Capstone/templates/admintable.html	(date 1689799259495)
+@@ -15,7 +15,7 @@
+ 			<td class="coleven">0</td>
+ 			<td class="colodd">555-555-5555</td>
+ 			<td class="coleven">Weekdays</td>
+-			<td class="colodd">Gateway</td>
++			<td class="colodd">Tech Control</td>
+ 			<td class="coleven">Yes</td>
+ 		</tr>
+ 		<tr class="rowodd">
+@@ -23,9 +23,9 @@
+ 			<td class="colodd">Hugo Chavez</td>
+ 			<td class="coleven">0</td>
+ 			<td class="colodd">555-555-5555</td>
+-			<td class="coleven">Weekdays</td>
++			<td class="coleven">Weekends</td>
+ 			<td class="colodd">Tech Control</td>
+-			<td class="coleven">Yes</td>
++			<td class="coleven">No</td>
+ 		</tr>
+ 	</table>
+ </div>
+\ No newline at end of file
