@@ -49,7 +49,12 @@ def admin():
                     message = "Successfully Deleted Employee"
                 else:
                     message = "Could not Delete Employee. Error Encountered: " + str(errors)
-
+                errors = db.delete_leave_by_empid(int(empid))
+                if not errors:
+                    message += ""
+                else:
+                    message += "Could not Delete Employee Leave Records. Error Encountered: " + str(errors)
+            logic.generate_leave_table()
             logic.generate_admin_table()
             return render_template('admin.html', logged=check_status(), alert=True, message=message)
         elif oper == 'view':
@@ -153,7 +158,7 @@ def add():
             errors = db.insert(empid, fname, lname, phone, job, shift, call_check, hours)
             logic.generate_admin_table()
             if not errors:
-                return render_template('admin.html', logged=check_status())
+                return redirect(url_for('admin'))
             else:
                 return render_template('add.html', logged=check_status(), submitted=False, alert=True,
                                        message="Error Adding Employee: " + errors)

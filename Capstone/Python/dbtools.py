@@ -3,6 +3,8 @@
 #                Database Tools
 import sqlite3
 import csv
+from datetime import datetime, date
+
 from Capstone.app import db_path, project_path
 
 database = db_path()
@@ -287,3 +289,63 @@ def update_leave_record(emp_id, fname, lname):
 
     close(conn)
     return False
+
+
+def delete_leave_by_empid(emp_id):
+    conn = connect()
+    c = conn.cursor()
+    try:
+        with conn:
+            c.execute(f"""DELETE FROM leave
+            WHERE empid={emp_id};
+                    """)
+    except sqlite3.Error as e:
+        close(conn)
+        return e
+
+    close(conn)
+    return False
+
+
+def check_on_leave(emp_id):
+    conn = connect()
+    c = conn.cursor()
+    try:
+        create_leave_table()
+        headers = ['key', 'empid', 'fname', 'lname', 'start', 'end']
+
+        temp_data = {}
+        total_rows = 0
+        data = {}
+        for row in c.execute('SELECT * FROM leave WHERE empid=?', (emp_id,)):
+            i = 0
+            for head in headers:
+                temp_data[head] = row[i]
+                i += 1
+
+            total_rows += 1
+            data[total_rows] = temp_data
+            temp_data = {}
+
+        close(conn)
+        for i in range(0, total_rows):
+            j = i + 1
+
+            start = data[j]['start']
+            end = data[j]['end']
+
+            splitdate = start.split("-")
+
+            start_date = date(int(splitdate[0]), int(splitdate[1]), int(splitdate[2]))
+            splitdate = end.split("-")
+            end_date = date(int(splitdate[0]), int(splitdate[1]), int(splitdate[2]))
+            today = date.today()
+
+            if start_date <= today <= end_date:
+                return True
+
+        return False
+
+    except sqlite3.Error as e:
+        close(conn)
+        return e

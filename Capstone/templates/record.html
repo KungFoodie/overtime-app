@@ -1,20 +1,14 @@
 <!--    Name: William Sung
         Assignment: CS493 Capstone
         Description: Employee record Template    -->
-{% extends 'base.html' %}
+{% extends 'admin.html' %}
 
-{% block title %}Employee Record{% endblock %}
-{% block scripts %}
-
-{% endblock %}
-{% block header %}Employee Record{% endblock %}
-
-{% block maincontent %}
+{% block extensions %}
 
     <div class="popup" id="open-form-view-record">
         <div class="popup-wrapper">
             <div class="popup-header row">
-                <h3 id="popup-header">Add/Remove Hours</h3>
+                <h3 id="popup-header">View/Modify Employee Record</h3>
                 <span class="close" id="x-button" onclick="window.location='/admin'">&times;</span>
             </div>
 

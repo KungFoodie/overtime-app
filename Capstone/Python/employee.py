@@ -2,6 +2,7 @@
 #   Description: CS493 Capstone
 #                Employee Class
 import functools
+from Capstone.Python import dbtools as db
 
 
 @functools.total_ordering
@@ -64,3 +65,6 @@ class Employee:
 
     def __eq__(self, other):
         return self.get_hours() == other.get_hours()
+
+    def on_leave(self):
+        return db.check_on_leave(self._empid)

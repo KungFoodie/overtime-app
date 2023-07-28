@@ -309,7 +309,6 @@ function show_hours_selection() {
     let question = document.getElementById('add-hours');
 
     if (selection == 'add' || selection == 'remove') {
-            alert(selection);
         add_questions.classList.add('show');
         add_questions.classList.remove('hide');
         question.setAttribute('required', 'required');

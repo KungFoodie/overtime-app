@@ -1,7 +1,12 @@
 #   Name: William Sung
 #   Description: CS493 Capstone
 #                App Logic
-import sqlite3, os, shutil, time, datetime
+import datetime
+import os
+import shutil
+import sqlite3
+import time
+
 from Capstone.Python import employee, linkedlist, dbtools as db, leave
 from Capstone.app import db_path, project_path
 
@@ -128,7 +133,7 @@ def generate_table_by_job(emp_list: linkedlist.LinkedList, htmlname):
         j = -1
         for i in range(0, emp_list.get_node_count()):
 
-            if node.get_call() == 'Yes':
+            if node.get_call() == 'Yes' and not node.on_leave():
                 j += 1
                 if j % 2 == 0:
                     rowclass = "roweven"
@@ -305,30 +310,6 @@ def generate_coverage_table(leave_id):
     with open(html, mode='w') as html:
         html.write(page)
 
-
-def mod_employee_hours(name, hours):
-    conn = sqlite3.connect()
-    c = conn.cursor()
-
-    names = name.split(" ")
-    fname = names[0]
-    lname = names[1]
-
-    db.update_hours(conn, c, fname, lname, hours)
-    c.close()
-    conn.close()
-
-
-def add_employee(fname, lname, phone, job, shift, call_check='Yes', hours=0):
-    conn = sqlite3.connect()
-    c = conn.cursor()
-
-    db.create(c)
-
-    db.insert(conn, c, fname, lname, phone, job, shift, call_check, hours)
-
-    c.close()
-    conn.close()
 
 
 def restore_backup():
