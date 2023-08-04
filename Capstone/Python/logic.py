@@ -6,7 +6,6 @@ import os
 import shutil
 import sqlite3
 import time
-
 from Capstone.Python import employee, linkedlist, dbtools as db, leave
 from Capstone.app import db_path, project_path
 
@@ -15,7 +14,6 @@ database = db_path()
 # backup database path
 database_backup = db_path() + ".bak"
 
-# database_backup = db_path() / ".bak"
 # template start
 template = project_path()
 

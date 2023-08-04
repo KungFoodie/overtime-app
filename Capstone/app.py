@@ -4,7 +4,7 @@
 import sqlite3
 from html import escape
 from flask import Flask, render_template, request, session, redirect, url_for
-from Capstone.Python.checker import status
+from Capstone.Python.checker import status, admin_status
 from Capstone.Python import logic, dbtools as db
 import os, threading
 
@@ -15,20 +15,57 @@ app.secret_key = "!@#123$%^456"
 
 # Database Backup Interval in Seconds
 backup_interval = 30
+# Flag for db backup
+backup = False
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/landing', methods=['GET', 'POST'])
+def landing():
+    if request.method == 'POST':
+        uname = request.form['uname']
+        psw = request.form['psw']
+
+        try:
+            conn = db.connect()
+            c = conn.cursor()
+            sql = f"SELECT * from users where username='{uname}' AND password='{psw}'"
+            c.execute(sql)
+            record = c.fetchone()
+            if record:
+                session['logged_in'] = True
+                admin_check = record[5]
+                if admin_check == 'yes':
+                    session['admin_logged_in'] = True
+                conn.close()
+                return redirect(url_for('index'))
+            else:
+                return render_template('landing.html', alert=True, message="Incorrect Username or Password")
+
+        except sqlite3.Error as e:
+            db.create_users_table()
+            conn.close()
+            return render_template('/', failed=True, alert=True,
+                                   message="No users found in system. Default admin generated. Please try again.")
+    if check_status():
+        return redirect(url_for('index'))
+
+    return render_template("landing.html")
+
+
 @app.route('/index', methods=['GET', 'POST'])
+@status
 def index():
     gw_list = logic.generate_list_by_job("Gateway")
     tc_list = logic.generate_list_by_job("Tech Control")
     logic.generate_table_by_job(gw_list, "gwtable.html")
     logic.generate_table_by_job(tc_list, "tctable.html")
+    logic.generate_leave_table()
     return render_template("index.html", logged=check_status())
 
 
 @app.route('/admin', methods=['GET', 'POST'])
-@status
+@admin_status
 def admin():
     if request.method == 'POST':
         oper = escape(request.form['oper'])
@@ -105,7 +142,7 @@ def admin():
 
 
 @app.route('/record/<empid>', methods=['GET', 'POST'])
-@status
+@admin_status
 def record(empid):
     if request.method == 'POST':
         formid = escape(request.form['empid'])
@@ -142,6 +179,7 @@ def record(empid):
 
 
 @app.route('/add', methods=['GET', 'POST'])
+@admin_status
 def add():
     if request.method == 'POST':
         empid = escape(request.form['empid'])
@@ -198,7 +236,9 @@ def login():
 def logout():
     if 'logged_in' in session:
         session.pop('logged_in')
-    return redirect(request.referrer)
+    if 'admin_logged_in' in session:
+        session.pop('admin_logged_in')
+    return redirect(url_for('landing'))
 
 
 def check_status():
@@ -207,23 +247,22 @@ def check_status():
     return False
 
 
-def project_path():
-    # get absolute path
-    path = os.path.dirname(os.path.abspath(__file__))
+def check_admin_status():
+    if 'admin_logged_in' in session:
+        return True
+    return False
 
-    # path = pathlib.Path(__file__).parent
-    return path
+
+def project_path():
+    return os.path.dirname(os.path.abspath(__file__))
 
 
 def db_path():
-
-    db = project_path() + '\\database\\employees.sqlite'
-
-    # db = project_path() / 'database' / 'employees.sqlite'
-    return db
+    return project_path() + '\\database\\employees.sqlite'
 
 
 if __name__ == '__main__':
-    #daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
-    #daemon.start()
+    if backup is True:
+        daemon = threading.Thread(target=logic.daemon_function_backup, args=(backup_interval,))
+        daemon.start()
     app.run()

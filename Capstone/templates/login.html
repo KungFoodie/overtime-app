@@ -6,6 +6,10 @@
         <input type="submit" class="logout" value="Logout">
     </form>
     {% else %}
+
+    <script>
+        window.location.href = '/';
+    </script>
         <button class="login-dropdown-button" onclick="show()">Login</button>
         <div class="login-content" id="login-content">
             <form action="/login" class="login" method="POST">

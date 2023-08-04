@@ -11,11 +11,156 @@ html, body {
 body {
     position: relative;
     margin: 0;
-
     background: linear-gradient(45deg, #2980B9, #CCCCFF);
     background-size: cover;
     font-family: "sans-serif";
     font-weight: 100;
+}
+
+
+/* Landing Login Page */
+
+.landing-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    font-size: 1.5em;
+}
+
+
+.login-row {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+
+.landing-login-form {
+    width: 100%;
+    padding: 2em;
+    position: relative;
+    background: rgba(0, 0, 0, .4);
+    box-shadow: black;
+}
+
+.landing-loginbox {
+    flex: 1;
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: gray;
+    font-size: 1rem;
+}
+
+
+.landing-login-button {
+    display: block;
+    padding: 1em;
+    width: 100%;
+
+    background: rgba(38, 208, 124, .9);
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: .75em;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+}
+
+.landing-label {
+    flex: 1;
+    padding: 1em;
+    border: 0;
+    background-color: lightgray;
+    font-size: 1rem;
+}
+
+.landing-header {
+    width: 100%;
+    color: #fff;
+    font-size: 1.5em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .9);
+    text-align: center;
+}
+
+/* Access Denied Page */
+.denied-access-body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock {
+    position: relative;
+    border-radius: 5px;
+    width: 55px;
+    height: 45px;
+    background-color: #333;
+    animation: dip 1s;
+    animation-delay: 1.5s;
+
+}
+
+.lock::before,
+.lock::after {
+    content: '';
+    position: absolute;
+    border-left: 5px solid #333;
+    height: 20px;
+    width: 15px;
+    left: calc(50% - 13px);
+}
+
+.lock::before {
+    top: -30px;
+    border: 5px solid #333;
+    border-bottom-color: transparent;
+    border-radius: 15px 15px 0 0;
+    height: 30px;
+    animation: lock 2s, spin 2s;
+}
+
+.lock::after {
+    top: -10px;
+    border-right: 5px solid transparent;
+    animation: spin 2s;
+}
+
+@keyframes lock {
+    0% {
+        top: -45px;
+    }
+    65% {
+        top: -45px;
+    }
+    100% {
+        top: -30px;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: scaleX(-1);
+        left: calc(50% - 30px);
+    }
+    65% {
+        transform: scaleX(1);
+        left: calc(50% - 12.5px);
+    }
+}
+
+@keyframes dip {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 
@@ -26,9 +171,9 @@ body {
     text-align: center;
     padding: 6px 0px;
     width: 100%;
-    background-color: rgba(255,255,255,0.1);
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     cursor: pointer;
     display: inline-block;
@@ -38,7 +183,7 @@ body {
 }
 
 .button:hover {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Login and Logout */
@@ -55,7 +200,7 @@ body {
 .login-dropdown-button, .logout input {
     cursor: pointer;
     font-size: 16px;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     border: none;
     outline: none;
     background-color: inherit;
@@ -72,7 +217,7 @@ body {
 
 .login-content {
     display: none;
-    background-color: rgba(55,58,73, 1);
+    background-color: rgba(55, 58, 73, 1);
     position: absolute;
     width: fit-content;
     margin-top: 45px;
@@ -84,7 +229,7 @@ body {
 
 .login-content label {
     display: block;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .login-button {
@@ -92,9 +237,9 @@ body {
     text-align: center;
     padding: 6px 0px;
     width: 100%;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     background-color: inherit;
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0rem 0rem 1rem 1rem;
     cursor: pointer;
     display: inline-block;
@@ -105,11 +250,11 @@ body {
 }
 
 .login-button:hover {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .loginbox {
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
 }
 
@@ -127,14 +272,14 @@ body {
 .nav {
     height: 45px;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     font-weight: bold;
 }
 
 .nav a {
     float: left;
     display: block;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -183,14 +328,14 @@ table {
 
     border-collapse: collapse;
     border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     overflow: hidden;
 }
 
 th, td {
     padding: 15px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     color: black;
     position: relative;
 }
@@ -200,12 +345,12 @@ th {
 }
 
 thead, th {
-    color: rgba(255,255,255,0.9);
-    background-color: rgba(0,0,0,0.4);
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 td:hover::before {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     content: '';
     height: 100%;
     left: -5000px;
@@ -219,7 +364,7 @@ td:hover::before {
 
 td:hover::after {
     overflow: hidden;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     content: '';
     height: 10000px;
     left: 0;
@@ -244,7 +389,7 @@ td:hover::after {
     width: 100%;
 }
 
-.admincol h1{
+.admincol h1 {
     text-align: center;
 }
 
@@ -276,8 +421,8 @@ legend {
 .textBox {
     width: 250px;
     border-radius: 1rem;
-    background-color: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .cancel {
@@ -287,8 +432,8 @@ legend {
 .select {
     width: 250px;
     border-radius: 1rem;
-    background-color: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .recordformcol .button, .employeeform .button {
@@ -297,7 +442,7 @@ legend {
 
 fieldset {
     border-radius: 1rem;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -306,7 +451,7 @@ legend {
     font-size: 30px;
 }
 
-.recordformcol, .employeeform{
+.recordformcol, .employeeform {
     width: 70%;
     margin: auto;
 }
@@ -342,9 +487,9 @@ legend {
     margin: 10px;
     border-radius: 1rem;
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: navajowhite;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
     z-index: 100;
 }
 
@@ -391,7 +536,7 @@ footer {
 }
 
 
-
+/* Hidden Forms */
 
 .popup {
     visibility: hidden;
@@ -404,7 +549,7 @@ footer {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-wrapper {
@@ -427,15 +572,15 @@ footer {
     float: right;
     color: gray;
     margin-right: 2%;
-  font-size: xxx-large;
-  font-weight: bold;
+    font-size: xxx-large;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .visible {
@@ -496,7 +641,7 @@ footer {
 }
 
 .show {
-  display: block;
+    display: block;
 }
 
 .cancel {
@@ -510,7 +655,7 @@ footer {
 }
 
 .employeetable, .leavetable {
-    overflow:auto;
+    overflow: auto;
     height: 50%;
 }
 
@@ -525,9 +670,7 @@ footer {
     }
 
 
-
     /* Footer */
-
     footer {
         position: relative;
 

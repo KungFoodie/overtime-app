@@ -11,7 +11,6 @@ database = db_path()
 
 
 def connect():
-
     try:
         conn = sqlite3.connect(database)
     except sqlite3.Error as e:
@@ -70,7 +69,7 @@ def search_by_id(search_id):
     c = conn.cursor()
     try:
         create()
-        c.execute(f"SELECT * FROM employee_records WHERE empid= ?;",(search_id,))
+        c.execute(f"SELECT * FROM employee_records WHERE empid= ?;", (search_id,))
     except sqlite3.Error as e:
         conn.close()
         return e
@@ -91,7 +90,7 @@ def update_hours(search_id, update):
     close(conn)
 
 
-def update_record(search_id, fname, lname, phone, job, shift, call, hours,):
+def update_record(search_id, fname, lname, phone, job, shift, call, hours, ):
     conn = connect()
     c = conn.cursor()
     try:
@@ -164,26 +163,25 @@ def create_users_table():
                         username TEXT,
                         firstname TEXT,
                         lastname TEXT,
-                        password TEXT
+                        password TEXT,
+                        administrator TEXT
                     );
                     """)
     except sqlite3.Error as e:
         close(conn)
         return e
     close(conn)
-    add_user("admin", "admin", "account", "admin123")
     return False
 
 
-def add_user(username, firstname, lastname, password):
+def add_user(username, firstname, lastname, password, administrator):
     conn = connect()
     c = conn.cursor()
     try:
         create_users_table()
         with conn:
-            c.execute(
-                "INSERT INTO users VALUES(?, ?, ?, ?, ?)",
-                (None, username, firstname, lastname, password))
+            c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)",
+                      (None, username, firstname, lastname, password, administrator))
     except sqlite3.Error as e:
         close(conn)
         return e
@@ -195,6 +193,8 @@ def create_new_db():
     connect()
     create()
     create_users_table()
+    add_user("admin", "admin", "account", "admin123", "yes")
+    add_user("user", "user", "accoount", "user123", "no")
 
 
 def create_leave_table():
@@ -218,7 +218,7 @@ def create_leave_table():
     return False
 
 
-def add_leave(empid, firstname, lastname, startdate,enddate):
+def add_leave(empid, firstname, lastname, startdate, enddate):
     conn = connect()
     c = conn.cursor()
     try:
